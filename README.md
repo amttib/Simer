@@ -4,7 +4,7 @@
 
 Silmer is an interactive statistics book of Iran's foreign trade. It covers exports and imports by product (8-digit tariff line), country, customs office, province and month. It also shows world commodity prices, Iran Mercantile Exchange prices, official exchange rates, export opportunities and the world market for every product.
 
-This repository holds only the built site (HTML, JSON data and photos). It runs on GitHub Pages without a server.
+This repository holds only the built site (HTML, JSON data and photos). It runs on GitHub Pages without a server. `live.json` carries the Iran Mercantile Exchange's latest trades and the Central Bank's rates, and is refreshed every 15 minutes.
 
 ## سیلمر · مرکز داده‌های تجارت ایران
 

@@ -356,6 +356,40 @@ footer.foot .credits { margin: 0; font-size: 12px; }
   .page-hero h1 { font-size: 22px; padding: 0 16px 12px; }
 }
 
+/* ---------------------------------------------------------------- live */
+.live-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--good);
+  margin-inline-end: 6px; vertical-align: 1px; box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 60%, transparent);
+  animation: live-pulse 1.8s ease-out infinite;
+}
+@keyframes live-pulse { 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+nav.tabs a.tab-live { display: inline-flex; align-items: center; }
+.live-status { color: var(--ink-2); font-size: 13px; margin: -10px 0 8px; }
+.live-link {
+  display: flex; align-items: center; gap: 2px; font-size: 13.5px; font-weight: 600; margin-bottom: 12px;
+  padding: 8px 12px; border-radius: 8px; background: var(--surface-2); color: var(--ink);
+}
+.live-link:hover { text-decoration: none; background: var(--grid); }
+.grid.metals { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.tile .value.tick-up { color: var(--good); }
+.tile .value.stale { color: var(--ink-2); }
+.tile .value.tick-down { color: var(--bad); }
+.ticker {
+  display: flex; align-items: center; gap: 22px; overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 16px;
+  margin: -6px 0 20px; color: var(--ink); font-size: 13.5px;
+}
+.ticker::-webkit-scrollbar { display: none; }
+.ticker:hover { text-decoration: none; border-color: var(--axis); }
+.ticker-live { font-weight: 700; font-size: 12px; letter-spacing: 0.08em; color: var(--good); display: inline-flex; align-items: center; flex: none; }
+.ticker-item { flex: none; }
+.ticker-item .t-name { color: var(--ink-2); }
+.ticker-item b { font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) {
+  .grid.metals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 </style>
 </head>
 <body>
@@ -374,6 +408,7 @@ footer.foot .credits { margin: 0; font-size: 12px; }
       </a>
       <nav class="tabs">
         <a href="#/" data-tab="overview" data-fa="خانه" data-en="Home">Home</a>
+        <a href="#/live" data-tab="live" class="tab-live"><span class="live-dot" aria-hidden="true"></span><span data-fa="زنده" data-en="Live">Live</span></a>
         <a href="#/explore" data-tab="explore" data-fa="آمارنامه" data-en="Trade Explorer">Trade Explorer</a>
         <a href="#/countries" data-tab="countries" data-fa="کشورها" data-en="Countries">Countries</a>
         <a href="#/provinces" data-tab="provinces" data-fa="استان‌ها" data-en="Provinces">Provinces</a>
@@ -773,6 +808,100 @@ const countryFix = {
   iso2: { ITA: "IT", NAM: "NA", TWN: "TW", REU: "RE", MCO: "MC", LIE: "LI", PRI: "PR" },
   special: { XFZ: "Iranian free zones", XSZ: "Special economic zones", XOT: "Other countries", XXX: "Unknown", ANS: "Undeclared" },
 };
+
+// Commodity-exchange groups (main > category > subcategory) seen in daily trading.
+const IME_MAIN_EN = { 1: "Industrial", 2: "Agricultural", 3: "Petrochemicals", 4: "Minerals", 5: "Oil products", 6: "Real estate", 7: "Side market" };
+const IME_CAT_EN = {
+  "فولاد": "Steel", "آلومینیوم": "Aluminium", "مس": "Copper", "روی": "Zinc", "کنسانتره": "Concentrate",
+  "کنسانتره مولیبدن": "Molybdenum concentrate", "طلا": "Gold", "نیکل": "Nickel", "کک": "Coke", "سیمان": "Cement",
+  "سنگ آهن": "Iron ore", "سرب": "Lead", "خودرو": "Vehicles", "آهن اسفنجی": "Sponge iron", "چدن": "Pig iron", "کنتور": "Meters",
+  "فرو سیلیس": "Ferrosilicon", "مولیبدن": "Molybdenum", "تیشو": "Tissue paper", "قیر آند آلومینیوم": "Anode pitch",
+  "کلینکر": "Clinker", "برنج": "Rice", "پسته": "Pistachios", "شکر": "Sugar", "کنجاله‌ها": "Oilseed meals", "جو": "Barley",
+  "ذرت": "Maize", "گندم": "Wheat", "کنستانتره و تفاله ها": "Feed concentrates and pulps", "نخود": "Chickpeas", "زعفران": "Saffron",
+  "خرما": "Dates", "عدس": "Lentils", "کشمش": "Raisins", "چای": "Tea", "مرغ منجمد": "Frozen chicken", "تخم مرغ": "Eggs",
+  "زیره": "Cumin", "پنبه محلوج": "Ginned cotton", "دانه های روغنی": "Oilseeds", "رب گوجه فرنگی": "Tomato paste",
+  "روغن خام": "Crude edible oil", "مرغ و جوجه": "Poultry", "روغن": "Oils and waxes", "دوده صنعتی": "Carbon black",
+  "قیر": "Bitumen", "اکستراکت": "Extract", "شیمیایی": "Chemicals", "نفتا": "Naphtha", "گوگرد": "Sulphur", "پلیمر": "Polymers",
+  "گازها و خوراکها": "Gases and feedstocks", "وکیوم باتوم": "Vacuum bottoms", "آیزوریسایکل": "Isorecycle", "لوب کات": "Lube cut",
+  "بنزین": "Gasoline", "نفت": "Crude and fuel oil", "آیزوفید": "Isofeed", "فرآورده های نفتی": "Oil products", "حلال": "Solvents",
+  "سلاپس واکس": "Slops wax", "عایق رطوبتی": "Waterproofing", "قیر خالص": "Straight-run bitumen", "قیر امولسیون": "Bitumen emulsion",
+  "قیر محلول": "Cutback bitumen", "قیر اصلاح شده": "Modified bitumen", "قیر نفتی": "Petroleum bitumen", "قیر دمیده": "Blown bitumen",
+  "ذغال سنگ و کک": "Coal and coke", "باریت": "Barite", "اسلاک واکس": "Slack wax", "پارافین واکس": "Paraffin wax",
+  "املاک و مستغلات": "Real estate", "ضایعات": "Scrap", "کشاورزی": "Agricultural", "صنعتی": "Industrial", "معدنی": "Minerals",
+  "آهک": "Lime", "سولفات": "Sulphates", "خوراک": "Animal feed", "محصولات آلایشی": "By-products", "ماسه": "Sand",
+  "کاغذ و مقوا": "Paper and board", "پوشش محافظتی": "Protective coatings", "منیزیم": "Magnesium", "نقره": "Silver",
+  "کود": "Fertiliser", "چوب": "Wood", "تجهیزات برق خورشیدی": "Solar power equipment",
+};
+const IME_CAT_CODE_EN = { "7-115": "Brass", "2-98": "Edible oil" };  // names shared by two different groups
+const IME_SUB_EN = {
+  "شمش آلومینیوم": "Aluminium ingot", "بیلت آلومینیومی": "Aluminium billet", "مفتول آلومینیوم": "Aluminium wire rod",
+  "اکسید آلومینیوم": "Alumina", "شمش آلیاژ": "Aluminium alloy ingot", "هیدروکسید آلومینیوم": "Aluminium hydroxide",
+  "تی بار": "Aluminium T-bar", "اسلب آلومینیوم": "Aluminium slab",
+  "آهن اسفنجی بریکت": "Hot briquetted iron", "آهن اسفنجی": "Sponge iron (DRI)", "تیشو": "Tissue paper", "وانت": "Pickup trucks",
+  "سواری": "Passenger cars", "کامیون": "Trucks", "شمش روی": "Zinc ingot", "سنگ آهن دانه بندی": "Graded iron ore",
+  "گندله": "Iron ore pellets", "سنگ آهن کلوخه": "Lump iron ore", "سیمان": "Cement", "سیمان سفید": "White cement",
+  "بلوم و بیلت فولادی": "Steel blooms and billets", "ورق سرد": "Cold-rolled sheet", "سیم فولادی": "Steel wire", "تختال": "Steel slab",
+  "ورق گالوانیزه": "Galvanised sheet", "تیرآهن متوسط": "Medium I-beams", "تیرآهن سبک": "Light I-beams",
+  "تیرآهن نیمه سنگین": "Semi-heavy I-beams", "تیرآهن سنگین": "Heavy I-beams", "تیرآهن صنعتی": "Industrial I-beams",
+  "میلگرد سبک": "Light rebar", "میلگرد متوسط": "Medium rebar", "میلگرد سنگین": "Heavy rebar",
+  "میلگرد فوق سنگین (صنعتی)": "Extra-heavy rebar", "میلگرد فولاد آلیاژی": "Alloy steel rebar", "ورق قلع اندود": "Tinplate",
+  "ورق سرد لوازم خانگی": "Cold-rolled sheet (appliances)", "ورق سرد خودرو": "Cold-rolled sheet (automotive)",
+  "ورق رنگی": "Pre-painted sheet", "ورق گرم": "Hot-rolled sheet", "ورق گرم خودرو": "Hot-rolled sheet (automotive)",
+  "ورق گرم نوردکاران": "Hot-rolled sheet (re-rollers)", "ورق گرم HB": "Hot-rolled sheet HB", "ورق گرم HC": "Hot-rolled sheet HC",
+  "ورق گالوانیزه خودرو": "Galvanised sheet (automotive)", "ورق گالوانیزه لوازم خانگی": "Galvanised sheet (appliances)",
+  "بلوم و بیلت آلیاژی": "Alloy blooms and billets", "ناودانی": "Channels", "نبشی": "Angles", "قراضه فولادی": "Steel scrap",
+  "شمش فولادی": "Steel ingot", "لوله": "Pipes", "پروفیل": "Profiles", "ریل": "Rails", "سبد مخلوط": "Mixed basket",
+  "قیر آند آلومینیوم": "Anode pitch", "سیم و مفتول مسی": "Copper wire and rod", "مس کاتدی": "Copper cathode",
+  "مس کم عیار": "Low-grade copper", "اسلب مسی": "Copper slab", "اکسید مس": "Copper oxide", "بیلت مسی": "Copper billet",
+  "مس مفتول": "Copper wire rod", "اکسید مولیبدن": "Molybdenum oxide", "شمش چدن": "Pig iron", "کنسانتره": "Concentrate",
+  "کنسانتره مولیبدن": "Molybdenum concentrate", "کک": "Coke", "طلا": "Gold", "نیکل": "Nickel", "شمش سرب": "Lead ingot",
+  "روغن پایه": "Base oil", "اسلاک واکس": "Slack wax", "پارافین واکس": "Paraffin wax", "روغن موتور": "Engine oil",
+  "مونومر وینیل استات": "Vinyl acetate monomer", "تری اتیلن گلایکول": "Triethylene glycol", "ایزوبوتانول": "Isobutanol",
+  "الکیل بنزن خطی": "Linear alkylbenzene", "ارتوزایلن": "Ortho-xylene", "پارازایلین": "Paraxylene", "سود کاستیک": "Caustic soda",
+  "اوره": "Urea", "آمونیاک": "Ammonia", "بنزن": "Benzene", "تولوئن": "Toluene", "اسید استیک": "Acetic acid",
+  "اتانول آمین": "Ethanolamine", "زایلین": "Xylene", "استایرن": "Styrene", "اسید ترفتالیک": "Terephthalic acid",
+  "دوده صنعتی": "Carbon black", "انیدرید فتالیک": "Phthalic anhydride", "آروماتیک سنگین": "Heavy aromatics",
+  "نرمال بوتانول": "n-Butanol", "دی اتیل هگزانول": "2-Ethylhexanol", "کریستال ملامین": "Melamine",
+  "متیلن دی ایزوسیانات": "MDI", "سولفات سدیم": "Sodium sulphate", "منواتیلن گلایکول": "Monoethylene glycol",
+  "اسید سولفوریک": "Sulphuric acid", "دی اتیلن گلایکول": "Diethylene glycol", "متانول": "Methanol",
+  "اسید کلریدریک": "Hydrochloric acid", "اسید نیتریک": "Nitric acid", "کربنات سدیم سبک": "Light soda ash",
+  "دی آمونیوم فسفات": "Diammonium phosphate", "پتاس": "Potash", "سولفات آمونیوم": "Ammonium sulphate", "اتانول": "Ethanol",
+  "PDA TAR": "PDA tar", "کاتیونی تندشکن": "Cationic rapid-setting", "نفوذی": "Penetration grade", "عملکردی": "Performance grade",
+  "گرانروی": "Viscosity grade", "کندگیر": "Medium-curing", "قیر": "Bitumen", "لوب کات سنگین": "Heavy lube cut",
+  "لوب کات سبک": "Light lube cut", "وکیوم باتوم": "Vacuum bottoms", "پلی بوتادین رابر": "Polybutadiene rubber",
+  "اپوکسی رزین جامد": "Solid epoxy resin", "اپوکسی رزین مایع": "Liquid epoxy resin", "PET نساجی SuperBright": "PET textile SuperBright",
+  "پلی اتیلن سنگین": "HDPE", "پلی اتیلن سنگین اکستروژن": "HDPE extrusion", "پلی اتیلن سنگین فیلم": "HDPE film",
+  "پلی اتیلن سنگین تزریقی": "HDPE injection", "پلی اتیلن سنگین بادی": "HDPE blow moulding", "پلی اتیلن سنگین دورانی": "HDPE rotomoulding",
+  "پلی اتیلن سبک": "LDPE", "پلی اتیلن سبک فیلم": "LDPE film", "پلی اتیلن سبک تزریقی": "LDPE injection", "پلی اتیلن سبک خطی": "LLDPE",
+  "پلی اتیلن ترفتالات بطری": "PET bottle grade", "پلی اتیلن ترفتالات نساجی": "PET textile grade", "پلی استایرن معمولی": "GPPS",
+  "پلی استایرن مقاوم": "HIPS", "پلی استایرن انبساطی": "EPS", "پلی استایرن": "Polystyrene", "پلی پروپیلن": "Polypropylene",
+  "پلی پروپیلن فیلم BOPP": "PP film (BOPP)", "پلی پروپیلن شیمیایی": "PP (chemical grade)", "پلی پروپیلن نساجی": "PP (textile grade)",
+  "پلی پروپیلن پزشکی": "PP (medical grade)", "پلی کربنات": "Polycarbonate", "نخ پلی استر": "Polyester yarn",
+  "پلی اتیلن LMP": "LMP polyethylene", "استایرن بوتادین رابر": "SBR", "استایرن بوتادین رابر تیره": "SBR (dark)",
+  "PVC امولسیون": "Emulsion PVC", "ABS": "ABS", "پلی وینیل کلراید": "PVC", "آرگون": "Argon",
+  "گوگرد کلوخه اسید ساز": "Lump sulphur (acid grade)", "گوگرد کلوخه کود شیمیایی": "Lump sulphur (fertiliser grade)",
+  "گوگرد کلوخه": "Lump sulphur", "گوگرد": "Sulphur", "گوگرد گرانول": "Granular sulphur", "کلوخه باریت": "Lump barite", "خاک روی": "Zinc ore",
+};
+// "Copper · Copper cathode" in English; the exchange's own Persian names otherwise.
+function imeGroupName(g) {
+  if (LANG !== "en") return g.sub_fa && g.sub_fa !== g.cat_fa ? `${g.cat_fa} · ${g.sub_fa}` : g.cat_fa || g.category;
+  const code = g.category.split("-").slice(0, 2).join("-");
+  const cat = IME_CAT_CODE_EN[code] || IME_CAT_EN[g.cat_fa] || g.cat_fa || g.category;
+  const sub = IME_SUB_EN[g.sub_fa] || g.sub_fa;
+  return !sub || sub === cat ? cat : `${cat} · ${sub}`;
+}
+const imeMainName = (code, fa) => (LANG === "en" ? IME_MAIN_EN[code] || fa : fa);
+
+// Contract types of exchange trades: نقدی, سلف (مچینگ), نسیه ...
+const CONTRACT_EN = [["سلف موازی استاندارد", "standard parallel forward"], ["سلف", "forward"], ["نقدی", "cash"], ["نسیه", "credit"],
+  ["اعتباری", "credit"], ["مچینگ", "matching"], ["کشف قیمت", "price discovery"]];
+function contractName(text) {
+  if (LANG !== "en" || !text) return text;
+  let out = text;
+  for (const [fa, en] of CONTRACT_EN) out = out.split(fa).join(en);
+  out = out.replace(/\s*\/\s*/g, " / ").trim();
+  return out.charAt(0).toUpperCase() + out.slice(1);
+}
 
 // Browser-only data layer for the server-less build (Claude Artifact / static hosting).
 // Mirrors the server's JSON shapes so the views are the same in both builds.
@@ -1534,7 +1663,7 @@ async function viewOverview(params) {
   const data = await api(`/api/overview${year ? `?year=${year}` : ""}`);
   const ir = data.irica;
   const root = h("div", {});
-  root.append(hero(ir, data.irica_series || []), features());
+  root.append(hero(ir, data.irica_series || []), liveTicker(), features());
   if (!ir && !data.atlas_series.length) {
     root.append(empty(L("هنوز داده‌ای بارگذاری نشده؛ از صفحه‌ی منابع داده، همگام‌سازی را اجرا کنید.", "No data loaded yet; run a sync from the data sources page."), sourcesLink()));
     return root;
@@ -2273,7 +2402,8 @@ function diffEl(v) {
 
 async function viewPrices() {
   const data = await api("/api/prices");
-  const root = h("div", {}, ...pageHead(L("قیمت‌ها", "Prices"),
+  const root = h("div", {}, h("a", { class: "live-link", href: "#/live" }, liveDot(),
+    L("قیمت‌های زنده‌ی امروز: بورس کالا، فلزات جهانی و نرخ ارز ←", "Today's live prices: commodity exchange, world metals and exchange rates →")), ...pageHead(L("قیمت‌ها", "Prices"),
     L("قیمت جهانی کالاهای پایه، بورس کالای ایران، نرخ رسمی ارز و قیمت هر کیلو در صادرات و واردات ایران، کنار هم.",
       "World commodity prices, the Iran Mercantile Exchange, official exchange rates and the price per kilo in Iran's exports and imports, side by side."), "pistachio"));
   const fx = Object.fromEntries((data.fx.rows || []).map((r) => [r.code, r]));
@@ -2420,6 +2550,290 @@ async function viewPrice(params, source, series) {
   return root;
 }
 
+
+// ------------------------------------------------------------------ live
+// World metals come straight from gold-api.com (it allows browser use) every minute; the
+// commodity-exchange trades and official rates come from the live feed, refreshed every 15 minutes.
+const METALS = [
+  ["XAU", ["طلا", "Gold"], "oz"], ["XAG", ["نقره", "Silver"], "oz"], ["HG", ["مس", "Copper"], "lb"],
+  ["XPT", ["پلاتین", "Platinum"], "oz"], ["XPD", ["پالادیوم", "Palladium"], "oz"],
+];
+const LB_PER_TONNE = 2204.62262;
+let metalCache = null, liveCache = null, liveTimer = null, liveMain = 0, liveGroup = null;
+
+// Starts from the feed's copy (fetched by the server at most 15 minutes ago), then the browser's own.
+async function fetchMetals(feed) {
+  if (metalCache && Date.now() - metalCache.at < 55000) return metalCache.prices;
+  const prices = { ...(feed?.metals || {}), ...(metalCache?.prices || {}) };
+  for (const [i, [sym]] of METALS.entries()) {
+    if (i) await new Promise((r) => setTimeout(r, 1200));  // the service bans several requests a second
+    try {
+      const r = await fetch(`https://api.gold-api.com/price/${sym}`, { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) break;
+      const d = await r.json();
+      if (isFinite(d.price)) prices[sym] = { price: d.price, at: d.updatedAt, prev: prices[sym]?.price ?? null, direct: true };
+    } catch {
+      break;  // unreachable from this browser: the feed's prices stand
+    }
+  }
+  metalCache = { at: Date.now(), prices };
+  return prices;
+}
+
+async function fetchLive(force = false) {
+  if (!force && liveCache && Date.now() - liveCache.at < 60000) return liveCache.data;
+  let data;
+  if (STATIC) {
+    const r = await fetch(`live.json?t=${Math.floor(Date.now() / 60000)}`);
+    if (!r.ok) throw new Error(L("فید قیمت‌های لحظه‌ای در دسترس نیست", "The live price feed is not available"));
+    data = await r.json();
+  } else {
+    data = await api("/api/live");
+  }
+  liveCache = { at: Date.now(), data };
+  return data;
+}
+
+// Metals quoted per troy ounce stay so; copper (per pound) is shown per tonne like the exchanges quote it.
+const metalValue = (sym, p) => (p == null ? null : sym === "HG" ? p * LB_PER_TONNE : p);
+const metalUnit = (sym) => (sym === "HG" ? L("دلار/تن", "$/t") : L("دلار/اونس", "$/oz"));
+const money = (v, d = 2) => (v == null || !isFinite(v) ? "—" : isEn() ? `$${nf(d).format(v)}` : `${nf(d).format(v)} $`);
+function ago(iso) {
+  if (!iso) return "—";
+  const s = Math.round((Date.now() - new Date(iso).getTime()) / 1000);
+  const rtf = new Intl.RelativeTimeFormat(LOC, { numeric: "auto" });
+  if (s < 60) return rtf.format(-Math.max(s, 0), "second");
+  if (s < 3600) return rtf.format(-Math.round(s / 60), "minute");
+  if (s < 86400) return rtf.format(-Math.round(s / 3600), "hour");
+  return rtf.format(-Math.round(s / 86400), "day");
+}
+// Iranian session dates: "چهارشنبه ۱۵ مهر ۱۴۰۵" / "Wed 7 Oct 2026".
+function sessionDate(fa, iso) {
+  if (!fa) return "—";
+  const opts = { timeZone: "UTC" };
+  if (isEn()) return iso ? new Date(iso).toLocaleDateString("en-GB", { ...opts, weekday: "short", day: "numeric", month: "short", year: "numeric" }) : fa;
+  const [y, m, d] = fa.split("/").map(Number);
+  const weekday = iso ? new Date(iso).toLocaleDateString("fa-IR", { ...opts, weekday: "long" }) : "";
+  return `${weekday} ${int(d)} ${monthName(m)} ${int(y)}`.trim();
+}
+const liveDot = () => h("span", { class: "live-dot", "aria-hidden": "true" });
+// Large rial sums: "۱۲٫۳ هزار میلیارد تومان" / "IRR 123T".
+function bigRial(r) {
+  if (r == null || !isFinite(r)) return "—";
+  if (isEn()) return r >= 1e12 ? `IRR ${nf1.format(r / 1e12)}T` : r >= 1e9 ? `IRR ${nf1.format(r / 1e9)}B` : `IRR ${nf0.format(r / 1e6)}M`;
+  const t = r / 10;
+  return t >= 1e12 ? `${nf1.format(t / 1e12)} هزار میلیارد تومان` : t >= 1e9 ? `${nf1.format(t / 1e9)} میلیارد تومان` : `${nf0.format(t / 1e6)} میلیون تومان`;
+}
+// Exchange prices are rials per kg; in US$ per tonne at the official rate when there is one.
+const perTonneUsd = (rialPerKg, usdRial) => (usdRial ? (rialPerKg * 1000) / usdRial : null);
+const usdRateOf = (live) => live?.fx?.rows?.find((r) => r.code === "USD")?.rial || null;
+
+async function viewLive() {
+  const data = await fetchLive().catch((e) => ({ error: e.message }));
+  const metals = { ...(data.metals || {}), ...(metalCache?.prices || {}) };
+  const root = h("div", {});
+  const metalTiles = {};
+  const status = h("p", { class: "live-status" });
+  const paintStatus = () => status.replaceChildren(h("span", {}, liveDot(), " ",
+    L("زنده", "Live"), " · ", L("فلزات", "metals"), " ", ago(Object.values(metalCache?.prices || data.metals || {}).map((p) => p.at).sort().pop()),
+    data.generated_at ? [" · ", L("بورس کالا و نرخ ارز", "exchange and rates"), " ", ago(data.generated_at)] : null));
+  root.append(h("h1", {}, L("بازار زنده", "Live market")),
+    h("p", { class: "sub" }, L("قیمت فلزات جهانی هر دقیقه به‌روز می‌شود؛ معاملات بورس کالا و نرخ رسمی ارز در طول روز هر ۱۵ دقیقه.",
+      "World metal prices update every minute; commodity-exchange trades and official exchange rates every 15 minutes during the day.")),
+    status);
+  paintStatus();
+  if (data.error) root.append(h("div", { class: "banner" }, data.error));
+
+  // ---- world metals, live
+  const wb = data.world_monthly || {};
+  const metalTile = ([sym, name]) => {
+    const value = h("div", { class: "value" });
+    const delta = h("div", { class: "delta" });
+    metalTiles[sym] = { value, delta };
+    return h("div", { class: "card tile" }, h("div", { class: "label" }, L(...name), " ", h("span", { class: "muted small" }, metalUnit(sym))), value, delta);
+  };
+  const paintMetals = (prices) => {
+    for (const [sym] of METALS) {
+      const t = metalTiles[sym];
+      const p = prices[sym];
+      const month = wb[sym];
+      if (!p && month) {  // no live price reachable: the last monthly average, said so
+        t.value.textContent = money(month.value, month.value >= 1000 ? 0 : 2);
+        t.value.classList.add("stale");
+        t.delta.replaceChildren(h("span", { class: "muted" }, L(`قیمت لحظه‌ای در دسترس نیست؛ میانگین ${gPeriod(month.period)} (بانک جهانی)`,
+          `Live price unavailable; ${gPeriod(month.period)} average (World Bank)`)));
+        continue;
+      }
+      t.value.classList.remove("stale");
+      const v = metalValue(sym, p?.price);
+      t.value.textContent = money(v, v != null && v >= 1000 ? 0 : 2);
+      const prev = metalValue(sym, p?.prev);
+      t.value.classList.toggle("tick-up", prev != null && v > prev);
+      t.value.classList.toggle("tick-down", prev != null && v < prev);
+      t.delta.replaceChildren(month && v != null
+        ? h("span", {}, L(`نسبت به میانگین ${gPeriod(month.period)} (بانک جهانی): `, `vs ${gPeriod(month.period)} average (World Bank): `), diffEl(v / month.value - 1))
+        : h("span", { class: "muted" }, p ? ago(p.at) : L("در دسترس نیست", "unavailable")));
+    }
+  };
+  root.append(section(L("فلزات جهانی (زنده)", "World metals (live)"), L("قیمت لحظه‌ای از gold-api.com.", "Spot prices from gold-api.com."),
+    h("div", { class: "grid metals" }, METALS.map(metalTile))));
+  paintMetals(metals);
+  fetchMetals(data).then((m) => { paintMetals(m); paintStatus(); paintCopper(m); });
+
+  // ---- copper: the exchange, the world and Iran's exports side by side
+  const usdRate = usdRateOf(data);
+  const groups = data.ime?.groups || [];
+  const copper = groups.find((g) => g.sub_fa === "مس کاتدی") || groups.find((g) => g.cat_fa === "مس" && g.unit === "تن");
+  const exportCopper = data.iran_export?.HG;
+  const copperBox = h("div", {});
+  root.append(copperBox);
+  function paintCopper(prices) {
+    const worldCopper = metalValue("HG", prices.HG?.price);
+    if (!copper || !usdRate || !worldCopper) return copperBox.replaceChildren();
+    const ime = perTonneUsd(copper.price, usdRate);
+    copperBox.replaceChildren(section(L("مس: بورس کالا، بازار جهانی و صادرات ایران", "Copper: the exchange, the world market and Iran's exports"),
+      L("هر سه به دلار هر تن. قیمت بورس کالا با نرخ رسمی بانک مرکزی به دلار تبدیل شده؛ با نرخ بازار آزاد عدد دلاری کمتر می‌شود.",
+        "All three in US$ per tonne. The exchange price is converted at the Central Bank's official rate; at the open-market rate the dollar figure would be lower."),
+      h("div", { class: "grid cols-4" },
+        tile(`${L("بورس کالا", "Exchange")} · ${imeGroupName(copper)}`, money(ime, 0), h("span", { class: "muted" }, sessionDate(copper.date, data.ime.sessions?.find((x) => x[0] === copper.date)?.[1]))),
+        tile(L("بازار جهانی (زنده)", "World market (live)"), money(worldCopper, 0), h("span", {}, L("اختلاف بورس کالا: ", "Exchange vs world: "), diffEl(ime / worldCopper - 1))),
+        exportCopper ? tile(`${L("صادرات ایران، مس کاتد", "Iran exports, copper cathode")} (${periodLabel(exportCopper.year_fa, exportCopper.months)})`, money(exportCopper.usd_kg * 1000, 0),
+          h("span", {}, L("اختلاف با بازار جهانی: ", "vs world market: "), diffEl((exportCopper.usd_kg * 1000) / worldCopper - 1))) : null)));
+  }
+  paintCopper(metals);
+
+  // ---- official exchange rates
+  const fx = data.fx || {};
+  if (fx.rows?.length) {
+    const fxTile = (r) => tile(`${currency(r.code, r.name_fa)} (${L("نرخ رسمی", "official")})`, toman(r.rial),
+      r.prev ? h("span", {}, diffEl(r.rial / r.prev - 1), L(" نسبت به روز قبل", " vs previous day")) : h("span", { class: "muted" }, `${isEn() ? "per" : ""} ${r.code}`.trim()));
+    const main4 = ["USD", "EUR", "AED", "CNY"];
+    root.append(section(`${L("نرخ رسمی ارز", "Official exchange rates")} – ${fx.date ? sessionDate(fx.date, fx.date_iso) : ""}`, L("بانک مرکزی جمهوری اسلامی ایران.", "Central Bank of Iran."),
+      h("div", { class: "grid cols-4" }, fx.rows.filter((r) => main4.includes(r.code)).map(fxTile)),
+      h("div", { style: "height:12px" }),
+      card("", null, table([
+        { label: L("ارز", "Currency"), render: (r) => h("span", {}, currency(r.code, r.name_fa), " ", h("span", { class: "muted small ltr" }, r.code)) },
+        { label: L("نرخ", "Rate"), num: true, value: (r) => r.rial, render: (r) => toman(r.rial) },
+        { label: L("تغییر", "Change"), num: true, value: (r) => (r.prev ? r.rial / r.prev - 1 : null), render: (r) => (r.prev ? diffEl(r.rial / r.prev - 1) : "—") },
+      ], fx.rows.filter((r) => !main4.includes(r.code))))));
+  }
+
+  // ---- commodity exchange, session by session
+  const ime = data.ime || {};
+  if (groups.length) {
+    const mains = [...new Set(groups.map((g) => g.main))].sort((a, b) => a - b);
+    const shown = groups.filter((g) => !liveMain || g.main === liveMain);
+    const latest = shown.filter((g) => g.date === ime.date);
+    const totals = latest.reduce((a, g) => ({ n: a.n + g.trades, v: a.v + (g.unit === "تن" ? g.volume : 0), val: a.val + g.value }), { n: 0, v: 0, val: 0 });
+    const detail = h("div", {});
+    const showGroup = (g) => {
+      liveGroup = g?.category || null;
+      if (!g) return detail.replaceChildren();
+      const rows = (data.ime.trades || []).filter((t) => t[0] === g.category);
+      const perKg = g.unit === "تن";
+      detail.replaceChildren(h("div", { style: "height:16px" }), card(`${imeGroupName(g)} – ${sessionDate(g.date, ime.sessions?.find((x) => x[0] === g.date)?.[1])}`,
+        L(`${int(rows.length)} معامله. قیمت به ازای هر ${perKg ? "کیلو" : "واحد"}؛ حجم به ${perKg ? "تن" : "عدد"}.`,
+          `${rows.length} trades. Prices per ${perKg ? "kg" : "item"}; volume in ${perKg ? "tonnes" : "items"}.`),
+        table([
+          { label: L("کالا", "Product"), wide: true, render: (t) => h("span", { dir: "auto" }, t[1] || "—") },
+          { label: L("تولیدکننده", "Producer"), render: (t) => h("span", { dir: "auto", class: "small" }, t[2] || "—") },
+          { label: L("نوع قرارداد", "Contract"), render: (t) => h("span", { dir: "auto", class: "small" }, contractName(t[3]) || "—") },
+          { label: L("قیمت", "Price"), num: true, value: (t) => t[4], render: (t) => toman(t[4]) },
+          { label: L("قیمت پایه", "Base price"), num: true, value: (t) => t[6], render: (t) => toman(t[6]) },
+          { label: L("حجم", "Volume"), num: true, value: (t) => t[5], render: (t) => nf0.format(t[5]) },
+          { label: L("عرضه / تقاضا", "Supply / demand"), num: true, render: (t) => (t[7] || t[8] ? `${nf0.format(t[7] || 0)} / ${nf0.format(t[8] || 0)}` : "—") },
+          { label: L("تحویل", "Delivery"), num: true, render: (t) => (isEn() && t[10]
+            ? new Date(t[10]).toLocaleDateString("en-GB", { timeZone: "UTC", day: "numeric", month: "short", year: "numeric" }) : t[9] ? t[9].replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]) : "—") },
+        ], rows)));
+      detail.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    const seg = h("div", { class: "seg" }, [0, ...mains].map((m) => h("button", {
+      class: liveMain === m ? "on" : "", onclick: () => { liveMain = m; liveGroup = null; route(); },
+    }, m ? imeMainName(m, groups.find((g) => g.main === m)?.main_fa) : L("همه", "All"))));
+    root.append(section(`${sourceLabel("ime")} – ${sessionDate(ime.date, ime.date_iso)}`,
+      L("میانگین وزنی قیمت معاملات بازار فیزیکی هر گروه در آخرین جلسه‌ای که معامله داشته، با تغییر نسبت به جلسه‌ی قبلی و روند ۳۰ جلسه. روی هر گروه بزنید تا تک‌تک معاملات را ببینید.",
+        "Volume-weighted average price of each group's physical-market trades in its latest session, the change from its previous session and its 30-session trend. Open a group to see every trade."),
+      h("div", { class: "filters" }, seg),
+      h("div", { class: "grid cols-4" },
+        tile(L("معاملات آخرین جلسه", "Trades, latest session"), int(totals.n), null),
+        tile(L("حجم", "Volume"), tons(totals.v * 1000), null),
+        tile(L("ارزش", "Value"), bigRial(totals.val), usdRate ? h("span", { class: "muted" }, `≈ ${usd(totals.val / usdRate)} ${L("با نرخ رسمی", "at the official rate")}`) : null),
+        tile(L("گروه‌های فعال", "Active groups"), int(latest.length), h("span", { class: "muted" }, L(`از ${int(shown.length)} گروه در ${int(ime.sessions?.length || 0)} جلسه‌ی اخیر`, `of ${shown.length} groups in the last ${ime.sessions?.length || 0} sessions`)))),
+      h("div", { style: "height:12px" }),
+      card("", null, table([
+        { label: L("گروه کالا", "Commodity group"), wide: true, render: (g) => h("a", { href: "#/live", onclick: (e) => { e.preventDefault(); e.stopPropagation(); showGroup(g); } }, imeGroupName(g)) },
+        { label: L("جلسه", "Session"), render: (g) => h("span", { class: "small" }, g.date === ime.date ? L("آخرین", "latest") : sessionDate(g.date, ime.sessions?.find((x) => x[0] === g.date)?.[1])) },
+        { label: L("معامله", "Trades"), num: true, value: (g) => g.trades, render: (g) => int(g.trades) },
+        { label: L("حجم (تن)", "Volume (t)"), num: true, value: (g) => g.volume, render: (g) => (g.unit === "تن" ? nf0.format(g.volume) : `${nf0.format(g.volume)} ${L("عدد", "items")}`) },
+        { label: L("میانگین قیمت هر کیلو", "Average price per kg"), num: true, value: (g) => g.price, render: (g) => toman(g.price) },
+        { label: L("دلار هر تن (نرخ رسمی)", "US$/t (official rate)"), num: true, value: (g) => (g.unit === "تن" ? perTonneUsd(g.price, usdRate) : null), render: (g) => (g.unit === "تن" ? money(perTonneUsd(g.price, usdRate), 0) : "—") },
+        { label: L("تغییر", "Change"), num: true, value: (g) => (g.prev_price ? g.price / g.prev_price - 1 : null), render: (g) => (g.prev_price ? diffEl(g.price / g.prev_price - 1) : "—") },
+        { label: L("روند", "Trend"), render: (g) => sparkline(g.spark, { color: "var(--import)" }) },
+      ], shown)),
+      detail));
+    if (liveGroup) {
+      const g = shown.find((x) => x.category === liveGroup);
+      if (g) setTimeout(() => showGroup(g), 0);
+    }
+  } else if (!data.error) {
+    root.append(empty(L("هنوز معامله‌ای از بورس کالا دریافت نشده است.", "No commodity-exchange trades have been fetched yet.")));
+  }
+  root.append(h("p", { class: "note small", style: "margin-top:20px" }, L(
+    "قیمت‌ها برای اطلاع است، نه پیشنهاد خرید یا فروش. فلزات: gold-api.com · بورس کالای ایران · بانک مرکزی جمهوری اسلامی ایران · میانگین ماهانه: بانک جهانی.",
+    "Prices are for information, not an offer to buy or sell. Metals: gold-api.com · Iran Mercantile Exchange · Central Bank of Iran · monthly averages: World Bank.")));
+
+  // Keep it moving while the page is open: metals every minute, the feed every five.
+  let ticks = 0;
+  const timer = liveTimer = setInterval(async () => {
+    if (!root.isConnected) return clearInterval(timer);  // the reader left the page
+    if (document.hidden) return;
+    ticks += 1;
+    const m = await fetchMetals(liveCache?.data);
+    paintMetals(m);
+    paintStatus();
+    paintCopper(m);
+    if (ticks % 5 === 0) {
+      const before = liveCache?.data?.generated_at;
+      const fresh = await fetchLive(true).catch(() => null);
+      if (fresh && fresh.generated_at !== before) route();
+    }
+  }, 60000);
+  return root;
+}
+
+// A strip of live prices under the home page photo.
+function liveTicker() {
+  const strip = h("a", { class: "ticker", href: "#/live", "aria-label": L("بازار زنده", "Live market") });
+  const paint = (metals, data) => {
+    const items = [];
+    for (const sym of ["XAU", "XAG", "HG"]) {
+      const p = metals[sym];
+      if (p) items.push([L(...METALS.find((m) => m[0] === sym)[1]), money(metalValue(sym, p.price), sym === "HG" ? 0 : 2), metalUnit(sym)]);
+    }
+    const usdRate = usdRateOf(data);
+    if (usdRate) items.push([L("دلار (نرخ رسمی)", "USD (official)"), toman(usdRate), ""]);
+    for (const g of (data?.ime?.groups || []).filter((g) => g.date === data.ime.date && g.unit === "تن").slice(0, 4)) {
+      items.push([imeGroupName(g), toman(g.price), L("هر کیلو", "per kg"), g.prev_price ? g.price / g.prev_price - 1 : null]);
+    }
+    strip.replaceChildren(h("span", { class: "ticker-live" }, liveDot(), L("زنده", "LIVE")),
+      ...items.map(([name, value, unit, change]) => h("span", { class: "ticker-item" },
+        h("span", { class: "t-name" }, name), " ", h("b", {}, value), unit ? h("span", { class: "muted small" }, ` ${unit}`) : null,
+        change != null ? [" ", diffEl(change)] : null)));
+  };
+  strip.append(h("span", { class: "ticker-live" }, liveDot(), L("زنده", "LIVE")), h("span", { class: "muted small" }, L("در حال دریافت قیمت‌ها…", "Loading prices…")));
+  fetchLive().catch(() => null).then((d) => {
+    paint({ ...(d?.metals || {}), ...(metalCache?.prices || {}) }, d);
+    fetchMetals(d).then((m) => paint(m, d));
+  });
+  const timer = liveTimer = setInterval(async () => {
+    if (!strip.isConnected) return clearInterval(timer);
+    if (document.hidden) return;
+    const d = await fetchLive().catch(() => null);
+    paint(await fetchMetals(d), d);
+  }, 60000);
+  return strip;
+}
+
 // ------------------------------------------------------------------ photo credits
 const PHOTOS = [
   ["port", "Durban container port", "Media Club", "CC BY-SA 2.0", "https://commons.wikimedia.org/wiki/File:Durban_container_port_(24747434937).jpg", "https://creativecommons.org/licenses/by-sa/2.0/"],
@@ -2505,6 +2919,7 @@ langButton?.addEventListener("click", () => {
 // ------------------------------------------------------------------ router
 const routes = [
   [/^\/?$/, "overview", viewOverview],
+  [/^\/live$/, "live", viewLive],
   [/^\/explore$/, "explore", viewExplore],
   [/^\/countries$/, "countries", viewCountries],
   [/^\/country\/([A-Z]{3})$/, "countries", viewCountry],
@@ -2539,6 +2954,7 @@ function updateBack() {
 let routeSeq = 0;
 async function route() {
   hideTip();
+  clearInterval(liveTimer);
   const seq = ++routeSeq;
   const [path, query] = current.split("?");
   const params = new URLSearchParams(query || "");
