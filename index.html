@@ -1,0 +1,2093 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="آمارنامه‌ی تعاملی تجارت خارجی ایران: صادرات و واردات به تفکیک کالا، کشور، گمرک، استان و ماه، قیمت جهانی کالاهای پایه، بورس کالا و نرخ ارز.">
+<meta property="og:title" content="راهکار · رادار تجارت خارجی ایران">
+<meta property="og:description" content="آمارنامه‌ی تعاملی تجارت خارجی ایران: صادرات و واردات به تفکیک کالا، کشور، گمرک، استان و ماه، قیمت جهانی کالاهای پایه، بورس کالا و نرخ ارز.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a78d6'/%3E%3Cpath d='M8 22l6-7 4 4 6-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>راهکار · رادار تجارت خارجی ایران</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f3f2ee;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --accent: #2a78d6;
+  --export: #2a78d6;
+  --import: #eb6834;
+  --export-wash: rgba(42, 120, 214, 0.10);
+  --good: #006300;
+  --bad: #d03b3b;
+  --warn-bg: #fff6e0;
+  --warn-ink: #6b4a00;
+  --radius: 10px;
+  --font: "Vazirmatn", "SF Arabic", "Segoe UI", Tahoma, system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --accent: #3987e5;
+    --export: #3987e5;
+    --import: #d95926;
+    --export-wash: rgba(57, 135, 229, 0.12);
+    --good: #0ca30c;
+    --bad: #e66767;
+    --warn-bg: #2e2612;
+    --warn-ink: #f2cf7a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #232321;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.10);
+  --accent: #3987e5;
+  --export: #3987e5;
+  --import: #d95926;
+  --export-wash: rgba(57, 135, 229, 0.12);
+  --good: #0ca30c;
+  --bad: #e66767;
+  --warn-bg: #2e2612;
+  --warn-ink: #f2cf7a;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code, .code { font-family: ui-monospace, "SF Mono", Menlo, monospace; direction: ltr; unicode-bidi: isolate; font-size: 0.92em; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.muted { color: var(--muted); }
+.ink-2 { color: var(--ink-2); }
+.small { font-size: 13px; }
+
+/* ---------------------------------------------------------------- header */
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--page) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.top-inner {
+  max-width: 1280px; margin: 0 auto; padding: 10px 24px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: baseline; gap: 10px; color: var(--ink); }
+button.back { padding: 2px 10px; font-size: 16px; line-height: 1.4; }
+.brand b { font-size: 20px; letter-spacing: -0.01em; }
+.brand span { color: var(--muted); font-size: 13px; }
+.brand:hover { text-decoration: none; }
+nav.tabs { display: flex; gap: 4px; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs a { white-space: nowrap; }
+nav.tabs a {
+  color: var(--ink-2); padding: 6px 12px; border-radius: 8px; font-size: 14px;
+}
+nav.tabs a:hover { background: var(--surface-2); text-decoration: none; }
+nav.tabs a.active { color: var(--ink); background: var(--surface-2); font-weight: 600; }
+.search { position: relative; margin-inline-start: auto; width: min(360px, 100%); }
+.search input {
+  width: 100%; font: inherit; font-size: 14px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 12px;
+}
+.search input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.search .results {
+  position: absolute; inset-inline: 0; top: calc(100% + 6px);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12); max-height: 420px; overflow: auto; display: none;
+}
+.search .results.open { display: block; }
+.search .results a {
+  display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; padding: 8px 12px;
+  color: var(--ink); border-bottom: 1px solid var(--border);
+}
+.search .results a:last-child { border-bottom: 0; }
+.search .results a:hover, .search .results a.sel { background: var(--surface-2); text-decoration: none; }
+.search .results .code { color: var(--ink-2); grid-row: span 2; align-self: center; }
+.search .results .en { color: var(--muted); font-size: 12px; direction: ltr; text-align: right; }
+
+/* ---------------------------------------------------------------- layout */
+main { max-width: 1280px; margin: 0 auto; padding: 24px 24px 64px; }
+main.loading { opacity: 0.55; transition: opacity 0.2s; }
+h1 { font-size: 24px; margin: 0 0 4px; line-height: 1.4; }
+h2 { font-size: 17px; margin: 0 0 2px; }
+.sub { color: var(--ink-2); margin: 0 0 20px; font-size: 14px; }
+.section { margin-top: 28px; }
+.section > h2 + .sub { margin-bottom: 12px; }
+.grid { display: grid; gap: 16px; }
+.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) {
+  .cols-2, .cols-4 { grid-template-columns: minmax(0, 1fr); }
+  .top-inner { padding: 10px 16px; gap: 12px; }
+  main { padding: 16px 16px 48px; }
+  .search { width: 100%; }
+}
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px 18px; min-width: 0;
+}
+.card h3 { font-size: 15px; margin: 0; }
+.card .card-sub { color: var(--muted); font-size: 12.5px; margin: 0 0 12px; }
+
+/* filters: one row above the content they scope */
+.filters { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 0 0 18px; }
+.filters label { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink-2); }
+select, button, .btn {
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; cursor: pointer;
+}
+button.primary { background: var(--accent); color: #fff; border-color: transparent; }
+button:disabled { opacity: 0.5; cursor: default; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; border-radius: 0; background: transparent; color: var(--ink-2); }
+.seg button.on { background: var(--surface-2); color: var(--ink); font-weight: 600; }
+
+/* ---------------------------------------------------------------- stat tiles */
+.tile { padding: 14px 18px; }
+.tile .label { color: var(--ink-2); font-size: 13px; }
+.tile .value { font-size: 26px; font-weight: 650; line-height: 1.3; margin-top: 2px; }
+.tile .delta { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.delta .up { color: var(--good); }
+.delta .down { color: var(--bad); }
+.tile .key { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-inline-end: 6px; vertical-align: 0; }
+
+/* ---------------------------------------------------------------- bar list (HTML bars, RTL) */
+.bars { display: grid; gap: 2px; }
+.bar-row {
+  display: grid; grid-template-columns: minmax(90px, 34%) 1fr auto; align-items: center; gap: 10px;
+  padding: 3px 4px; border-radius: 6px; color: var(--ink);
+}
+a.bar-row:hover, .bar-row:focus-visible { background: var(--surface-2); text-decoration: none; outline: none; }
+.bar-row .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; }
+.bar-row .track { height: 14px; display: flex; }
+.bar-row .fill {
+  height: 14px; min-width: 2px; background: var(--c, var(--export));
+  border-start-end-radius: 4px; border-end-end-radius: 4px;
+}
+.bar-row .val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; min-width: 72px; text-align: left; }
+
+/* ---------------------------------------------------------------- tables */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th, td { padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--ink-2); font-weight: 600; font-size: 12.5px; white-space: nowrap; position: sticky; top: 0; background: var(--surface); }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: var(--ink); }
+th.sorted::after { content: " ▾"; }
+td.num, th.num { text-align: left; }
+td.wide { min-width: 220px; }
+tbody tr:hover td { background: var(--surface-2); }
+td .name { display: block; }
+td .en { display: block; color: var(--muted); font-size: 12px; direction: ltr; text-align: right; }
+.meter { display: inline-flex; align-items: center; gap: 8px; }
+.meter .m-track { width: 64px; height: 6px; border-radius: 3px; background: var(--export-wash); overflow: hidden; }
+.meter .m-fill { display: block; height: 100%; background: var(--export); border-radius: 3px; }
+
+/* ---------------------------------------------------------------- line chart */
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart .gridline { stroke: var(--grid); stroke-width: 1; }
+.chart .baseline { stroke: var(--axis); stroke-width: 1; }
+.chart .tick { fill: var(--muted); font-size: 11px; font-family: var(--font); }
+.chart .series-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .end-dot { stroke: var(--surface); stroke-width: 2; }
+.chart .end-label { fill: var(--ink-2); font-size: 12px; font-family: var(--font); }
+.chart .crosshair { stroke: var(--axis); stroke-width: 1; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+.legend .k { display: inline-block; width: 14px; height: 2px; border-radius: 1px; vertical-align: middle; margin-inline-end: 6px; }
+.legend .k.rect { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ---------------------------------------------------------------- tooltip */
+#tip {
+  position: fixed; z-index: 50; pointer-events: none; display: none;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); padding: 8px 10px; font-size: 13px; min-width: 140px;
+}
+#tip .t-title { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+#tip .t-row { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+#tip .t-row b { font-variant-numeric: tabular-nums; }
+#tip .t-key { display: inline-block; width: 12px; height: 2px; border-radius: 1px; margin-inline-end: 6px; vertical-align: middle; }
+
+/* ---------------------------------------------------------------- misc */
+.banner { background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px; padding: 10px 14px; font-size: 13.5px; margin: 0 0 16px; }
+.note { color: var(--ink-2); font-size: 13px; background: var(--surface-2); border-radius: 8px; padding: 10px 14px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+.chip { font-size: 12.5px; padding: 2px 10px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); }
+a.chip:hover { text-decoration: none; color: var(--ink); }
+.empty { color: var(--muted); padding: 24px 0; text-align: center; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-size: 14px; }
+.kv dt { color: var(--ink-2); }
+.kv dd { margin: 0; }
+.log { font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: var(--surface-2); border-radius: 8px; padding: 10px; max-height: 220px; overflow: auto; white-space: pre-wrap; direction: rtl; }
+footer.foot { max-width: 1280px; margin: 0 auto; padding: 16px 24px 32px; color: var(--muted); font-size: 12.5px; }
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--grid); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: -2px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------------------------------------------------------------- prices */
+.spark { display: block; }
+td .spark { display: inline-block; vertical-align: middle; }
+.diff-up { color: var(--good); }
+.diff-down { color: var(--bad); }
+tr.clickable { cursor: pointer; }
+.pill { display: inline-block; font-size: 11.5px; padding: 0 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); }
+
+</style>
+</head>
+<body>
+<div>
+
+  <header class="top">
+    <div class="top-inner">
+      <button id="back" class="back" type="button" hidden aria-label="بازگشت">→</button>
+      <a class="brand" href="#/"><b>راهکار</b><span>رادار تجارت خارجی ایران</span></a>
+      <nav class="tabs">
+        <a href="#/" data-tab="overview">نمای کلی</a>
+        <a href="#/explore" data-tab="explore">آمارنامه</a>
+        <a href="#/countries" data-tab="countries">کشورها</a>
+        <a href="#/provinces" data-tab="provinces">استان‌ها</a>
+        <a href="#/prices" data-tab="prices">قیمت‌ها</a>
+        <a href="#/opportunities" data-tab="opportunities">فرصت‌ها</a>
+        <a href="#/sources" data-tab="sources">منابع</a>
+      </nav>
+      <div class="search">
+        <input id="q" type="search" autocomplete="off" placeholder="جستجوی کالا: نام فارسی/انگلیسی یا کد تعرفه" aria-label="جستجوی کالا">
+        <div class="results" id="results" role="listbox"></div>
+      </div>
+    </div>
+  </header>
+  <main id="view"></main>
+  <footer class="foot">
+    داده‌ها: گمرک جمهوری اسلامی ایران · The Growth Lab at Harvard University, Atlas of Economic Complexity · UN Comtrade.
+    ارقام برای تحقیق اولیه است؛ پیش از هر تصمیم تجاری، مقررات، تحریم و قیمت تمام‌شده را جداگانه بررسی کنید.
+  </footer>
+  <div id="tip" role="tooltip"></div>
+
+</div>
+<script>
+window.RAHKAR_STATIC = true;
+(() => {
+// Small dependency-free charts. Colours come from CSS custom properties.
+const SVG = "http://www.w3.org/2000/svg";
+
+function svg(tag, attrs = {}) {
+  const el = document.createElementNS(SVG, tag);
+  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  return el;
+}
+
+function span(cls, text) {
+  const el = document.createElement("span");
+  el.className = cls;
+  if (text != null) el.textContent = text;
+  return el;
+}
+
+// ------------------------------------------------------------------ tooltip
+const tipEl = () => document.getElementById("tip");
+
+function fillTip(title, rows) {
+  const el = tipEl();
+  el.replaceChildren();
+  if (title) el.append(span("t-title", title));
+  for (const r of rows) {
+    const row = span("t-row");
+    const name = span("");
+    if (r.color) {
+      const key = span("t-key");
+      key.style.background = r.color;
+      name.append(key);
+    }
+    name.append(document.createTextNode(r.label));
+    const value = document.createElement("b");
+    value.textContent = r.value;
+    row.append(name, value);
+    el.append(row);
+  }
+  el.style.display = "block";
+  return el;
+}
+
+function place(el, x, y) {
+  const pad = 14;
+  const r = el.getBoundingClientRect();
+  let left = x + pad;
+  let top = y + pad;
+  if (left + r.width > innerWidth - 8) left = x - r.width - pad;
+  if (top + r.height > innerHeight - 8) top = y - r.height - pad;
+  el.style.left = `${Math.max(8, left)}px`;
+  el.style.top = `${Math.max(8, top)}px`;
+}
+
+function showTip(evt, title, rows) {
+  place(fillTip(title, rows), evt.clientX, evt.clientY);
+}
+
+function showTipAt(target, title, rows) {
+  const r = target.getBoundingClientRect();
+  place(fillTip(title, rows), r.left + r.width / 2, r.top + r.height / 2);
+}
+
+function hideTip() {
+  tipEl().style.display = "none";
+}
+
+// ------------------------------------------------------------------ bar list (HTML, RTL)
+// items: [{label, value, color?, href?}]  One series = one colour; `color` on an item is
+// only for emphasis (e.g. Iran among exporters).
+function barList(items, { color = "var(--export)", format = String, tip } = {}) {
+  const wrap = document.createElement("div");
+  wrap.className = "bars";
+  const max = Math.max(1, ...items.map((d) => d.value || 0));
+  for (const d of items) {
+    const row = document.createElement(d.href ? "a" : "div");
+    row.className = "bar-row";
+    if (d.href) row.href = d.href;
+    else row.tabIndex = 0;
+    const label = span("lbl", d.label);
+    label.title = d.label;
+    const track = span("track");
+    const fill = span("fill");
+    fill.style.width = `${(100 * Math.max(0, d.value || 0)) / max}%`;
+    fill.style.setProperty("--c", d.color || color);
+    track.append(fill);
+    row.append(label, track, span("val", format(d.value)));
+    if (tip) {
+      row.addEventListener("pointermove", (e) => showTip(e, d.label, tip(d)));
+      row.addEventListener("pointerleave", hideTip);
+      row.addEventListener("focus", () => showTipAt(row, d.label, tip(d)));
+      row.addEventListener("blur", hideTip);
+    }
+    wrap.append(row);
+  }
+  return wrap;
+}
+
+// ------------------------------------------------------------------ line chart
+function niceStep(range, count) {
+  const raw = range / count;
+  const mag = 10 ** Math.floor(Math.log10(raw));
+  const norm = raw / mag;
+  return (norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10) * mag;
+}
+
+// series: [{name, color, points: [{x, y}]}], one shared y-axis starting at zero.
+// maxGap: points further apart than this on x are not joined (a missing year stays a gap).
+function lineChart(series, { format = String, tickFormat = format, xFormat = String, height = 260, maxGap = Infinity } = {}) {
+  const wrap = document.createElement("div");
+  wrap.className = "chart";
+
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  if (series.length > 1) {
+    for (const s of series) {
+      const item = span("");
+      const key = span("k");
+      key.style.background = s.color;
+      item.append(key, document.createTextNode(s.name));
+      legend.append(item);
+    }
+  }
+  const holder = document.createElement("div");
+  holder.style.direction = "ltr";
+  wrap.append(legend, holder);
+
+  const xs = [...new Set(series.flatMap((s) => s.points.map((p) => p.x)))].sort((a, b) => a - b);
+  const ys = series.flatMap((s) => s.points.map((p) => p.y)).filter((v) => v != null);
+  if (!xs.length || !ys.length) return wrap;
+  const step = niceStep(Math.max(...ys) || 1, 4);
+  const maxY = Math.ceil(Math.max(...ys) / step) * step || step;
+  const ticks = [];
+  for (let t = 0; t <= maxY + step / 2; t += step) ticks.push(t);
+
+  function draw() {
+    const W = Math.max(320, holder.clientWidth || 640);
+    const H = height;
+    const m = { t: 12, r: 110, b: 28, l: 64 };
+    const x = (v) => m.l + (xs.length > 1 ? (v - xs[0]) / (xs[xs.length - 1] - xs[0]) : 0.5) * (W - m.l - m.r);
+    const y = (v) => m.t + (1 - v / maxY) * (H - m.t - m.b);
+    const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H, role: "img" });
+
+    for (const t of ticks) {
+      root.append(svg("line", { class: t === 0 ? "baseline" : "gridline", x1: m.l, x2: W - m.r, y1: y(t), y2: y(t) }));
+      const label = svg("text", { class: "tick", x: m.l - 8, y: y(t) + 4, "text-anchor": "end" });
+      label.textContent = tickFormat(t);
+      root.append(label);
+    }
+    const every = xs.length > 14 ? 2 : 1;
+    xs.forEach((v, i) => {
+      if (i % every && i !== xs.length - 1) return;
+      const label = svg("text", { class: "tick", x: x(v), y: H - 8, "text-anchor": "middle" });
+      label.textContent = xFormat(v);
+      root.append(label);
+    });
+
+    const ends = [];
+    for (const s of series) {
+      const pts = s.points.filter((p) => p.y != null).sort((a, b) => a.x - b.x);
+      if (!pts.length) continue;
+      const d = pts.map((p, i) => `${i && p.x - pts[i - 1].x <= maxGap ? "L" : "M"}${x(p.x).toFixed(1)},${y(p.y).toFixed(1)}`).join("");
+      root.append(svg("path", { class: "series-line", d, stroke: s.color }));
+      const last = pts[pts.length - 1];
+      root.append(svg("circle", { class: "end-dot", cx: x(last.x), cy: y(last.y), r: 4, fill: s.color }));
+      ends.push({ s, last });
+    }
+    // Direct end labels only when they don't collide; the legend and tooltip carry the rest.
+    const apart = ends.every((a, i) => ends.every((b, j) => i === j || Math.abs(y(a.last.y) - y(b.last.y)) > 16));
+    if (apart) {
+      for (const { s, last } of ends) {
+        const label = svg("text", { class: "end-label", x: x(last.x) + 10, y: y(last.y) + 4 });
+        label.textContent = `${s.name} ${format(last.y)}`;
+        root.append(label);
+      }
+    }
+
+    const cross = svg("line", { class: "crosshair", y1: m.t, y2: H - m.b, visibility: "hidden" });
+    const hit = svg("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent", tabindex: 0 });
+    root.append(cross, hit);
+    const at = (clientX) => {
+      const r = hit.getBoundingClientRect();
+      const px = m.l + ((clientX - r.left) / r.width) * (W - m.l - m.r);
+      return xs.reduce((best, v) => (Math.abs(x(v) - px) < Math.abs(x(best) - px) ? v : best), xs[0]);
+    };
+    const show = (v, place) => {
+      cross.setAttribute("x1", x(v));
+      cross.setAttribute("x2", x(v));
+      cross.setAttribute("visibility", "visible");
+      const rows = series.map((s) => {
+        const p = s.points.find((q) => q.x === v);
+        return { label: s.name, value: p && p.y != null ? format(p.y) : "—", color: s.color };
+      });
+      place(xFormat(v), rows);
+    };
+    hit.addEventListener("pointermove", (e) => show(at(e.clientX), (t, rows) => showTip(e, t, rows)));
+    hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
+    hit.addEventListener("focus", () => show(xs[xs.length - 1], (t, rows) => showTipAt(hit, t, rows)));
+    hit.addEventListener("blur", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
+    holder.replaceChildren(root);
+  }
+
+  let lastWidth = 0;
+  new ResizeObserver(() => {
+    if (holder.clientWidth && holder.clientWidth !== lastWidth) {
+      lastWidth = holder.clientWidth;
+      draw();
+    }
+  }).observe(holder);
+  return wrap;
+}
+
+// ------------------------------------------------------------------ sparkline
+// A tiny trend line for table cells; the last point is marked.
+function sparkline(values, { color = "var(--export)", width = 72, height = 20 } = {}) {
+  const pts = values.map((v, i) => [i, v]).filter(([, v]) => v != null && isFinite(v));
+  const root = svg("svg", { width, height, viewBox: `0 0 ${width} ${height}`, class: "spark", "aria-hidden": "true" });
+  if (pts.length < 2) return root;
+  const ys = pts.map(([, v]) => v);
+  const lo = Math.min(...ys), hi = Math.max(...ys);
+  const x = (i) => 2 + (i / (values.length - 1)) * (width - 4);
+  const y = (v) => (hi === lo ? height / 2 : 2 + (1 - (v - lo) / (hi - lo)) * (height - 4));
+  root.append(svg("path", { d: pts.map(([i, v], k) => `${k ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(""),
+    fill: "none", stroke: color, "stroke-width": 1.5, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+  const [li, lv] = pts[pts.length - 1];
+  root.append(svg("circle", { cx: x(li), cy: y(lv), r: 2.2, fill: color }));
+  return root;
+}
+
+// Browser-only data layer for the server-less build (Claude Artifact / static hosting).
+// Mirrors the server's JSON shapes so the views are the same in both builds.
+
+const DATA_CACHE = {};
+function loadData(name) {
+  if (!(name in DATA_CACHE)) {
+    DATA_CACHE[name] = fetch(`data/${name}.json`).then((r) => {
+      if (!r.ok) throw new Error(`داده‌ی «${name}» بارگذاری نشد`);
+      return r.json();
+    });
+  }
+  return DATA_CACHE[name];
+}
+
+const FLOW_CODES = ["X", "M"];
+const YEAR_OFFSET = 621;
+const MONTH_NAMES = ["کل دوره", "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+
+function normFa(text) {
+  return String(text || "")
+    .replace(/[يى]/g, "ی").replace(/ك/g, "ک").replace(/[ةۀ]/g, "ه")
+    .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+    .replace(/\s+/g, " ").trim();
+}
+
+let PRODUCTS = null;
+async function productIndex() {
+  if (!PRODUCTS) {
+    const list = await loadData("products");
+    PRODUCTS = new Map(list.map((p) => [p[0], { code: p[0], level: p[1], name_fa: p[2], name_en: p[3], total: p[4] }]));
+  }
+  return PRODUCTS;
+}
+
+function countryOf(meta, iso3) {
+  return meta.countries[iso3] || { iso3, iso2: null, name_en: null, name_fa: null };
+}
+
+function periodsOf(meta) {
+  return Object.fromEntries(Object.entries(meta.periods).map(([y, m]) => [Number(y), m]));
+}
+
+function chapterInfo(meta, code) {
+  return { code: code.slice(0, 2), name_fa: meta.chapters_fa[code.slice(0, 2)] || null };
+}
+
+// ------------------------------------------------------------------ routing of API paths
+async function staticApi(path) {
+  const url = new URL(path, "https://rahkar.invalid");
+  const p = url.pathname;
+  const q = url.searchParams;
+  const year = /^\d+$/.test(q.get("year") || "") ? q.get("year") : null;
+  let m;
+  if (p === "/api/overview") {
+    const o = await loadData("overview");
+    return o[year] || o.default;
+  }
+  if (p === "/api/opportunities") {
+    const o = await loadData("opportunities");
+    const key = `${q.get("mode") === "existing" ? "existing" : "new"}|${q.get("exclude_raw") === "0" ? 0 : 1}|${Math.round(Number(q.get("min_world") || 0))}`;
+    return o[key] || o["new|1|0"];
+  }
+  if (p === "/api/countries") {
+    const c = await loadData("countries");
+    return c.lists[year] || c.lists.default;
+  }
+  if ((m = p.match(/^\/api\/country\/([A-Za-z]{3})$/))) {
+    const c = await loadData("countries");
+    const data = c.profiles[m[1].toUpperCase()];
+    if (!data) throw new Error("کشوری با این کد پیدا نشد");
+    return data;
+  }
+  if (p === "/api/provinces") {
+    const v = await loadData("provinces");
+    return v.lists[year] || v.lists.default;
+  }
+  if ((m = p.match(/^\/api\/province\/(.+)$/))) {
+    const v = await loadData("provinces");
+    const byYear = v.profiles[normFa(decodeURIComponent(m[1]))];
+    if (!byYear) throw new Error("استانی با این نام پیدا نشد");
+    return byYear[year] || byYear[String(v.lists.default.year_fa)] || Object.values(byYear).pop();
+  }
+  if (p === "/api/prices") return (await loadData("prices")).overview;
+  if (p === "/api/price") {
+    const data = (await loadData("prices")).series[`${q.get("source")}|${q.get("series")}`];
+    if (!data) throw new Error("این سری قیمت پیدا نشد");
+    return data;
+  }
+  if (p === "/api/status") return (await loadData("meta")).status;
+  if (p === "/api/search") return staticSearch(q.get("q") || "");
+  if ((m = p.match(/^\/api\/product\/(\d{2,10})$/))) return staticProduct(m[1]);
+  if (p === "/api/explore/options") return staticOptions();
+  if (p === "/api/explore") return staticExplore(q);
+  throw new Error("این بخش در نسخه‌ی آنلاین در دسترس نیست.");
+}
+
+// ------------------------------------------------------------------ search
+async function staticSearch(text, limit = 25) {
+  const [meta, idx] = await Promise.all([loadData("meta"), productIndex()]);
+  const q = normFa(text);
+  if (!q) return [];
+  const compact = q.replace(/ /g, "");
+  let list;
+  if (/^\d+$/.test(compact)) {
+    list = [...idx.values()].filter((p) => p.code.startsWith(compact))
+      .sort((a, b) => a.level - b.level || a.code.localeCompare(b.code));
+  } else {
+    const tokens = q.split(" ").slice(0, 5).map((t) => t.toLowerCase());
+    const hay = (p) => `${p.name_fa || ""} ${p.name_en || ""}`.toLowerCase();
+    const starts = (p) => (p.name_fa || "").startsWith(tokens[0]) || (p.name_en || "").toLowerCase().startsWith(tokens[0]);
+    list = [...idx.values()].filter((p) => tokens.every((t) => hay(p).includes(t)))
+      .sort((a, b) => starts(b) - starts(a) || b.total - a.total || a.level - b.level || a.code.localeCompare(b.code));
+  }
+  return list.slice(0, limit).map((p) => ({ code: p.code, level: p.level, name_fa: p.name_fa, name_en: p.name_en, chapter: chapterInfo(meta, p.code) }));
+}
+
+// ------------------------------------------------------------------ one product
+async function chapterTables(meta, ch) {
+  if (!meta.chapters.includes(ch)) {
+    return [{ codes: [], rows: [], atlas: {} }, { offices: [], monthly: [], province: [], world: {} }];
+  }
+  return Promise.all([loadData(`t/${ch}`), loadData(`d/${ch}`)]);
+}
+
+function sumInto(obj, key, v) {
+  obj[key] = (obj[key] || 0) + (v || 0);
+}
+
+async function staticProduct(code) {
+  code = code.replace(/\D/g, "");
+  if (![2, 4, 6, 8].includes(code.length)) throw new Error("کالایی با این کد پیدا نشد");
+  const [meta, idx, mx] = await Promise.all([loadData("meta"), productIndex(), loadData("metrics")]);
+  const [t, d] = await chapterTables(meta, code.slice(0, 2));
+  const match = t.codes.map((c) => c.startsWith(code));
+  const info = idx.get(code);
+  if (!info && !match.some(Boolean)) throw new Error("کالایی با این کد پیدا نشد");
+  const periods = periodsOf(meta);
+  const country = (iso3) => countryOf(meta, iso3);
+  const worldCode = code.length === 8 ? code.slice(0, 6) : code.length >= 4 ? code : null;
+  const pre = worldCode ? d.world[worldCode] || d.world[worldCode.slice(0, 4)] : null;
+
+  // ---- names
+  let nameFa = (info && info.name_fa) || (code.length === 2 ? meta.chapters_fa[code] : null);
+  if (!nameFa && code.length === 6) nameFa = idx.get(code + "00")?.name_fa || null;
+  const ancestors = [2, 4, 6].filter((n) => code.length > n).map((n) => {
+    const a = idx.get(code.slice(0, n));
+    return { code: code.slice(0, n), name_fa: (a && a.name_fa) || (n === 2 ? meta.chapters_fa[code.slice(0, 2)] : null), name_en: a ? a.name_en : null };
+  });
+
+  // ---- every source, year by year
+  const series = [];
+  const add = (source, label, values) => {
+    for (const flow of FLOW_CODES) {
+      if (Object.values(values[flow]).some((v) => v)) series.push({ source, label, flow, values: values[flow] });
+    }
+  };
+  const irica = { X: {}, M: {} };
+  for (const [y, f, , ci, v] of t.rows) if (match[ci]) sumInto(irica[FLOW_CODES[f]], y + YEAR_OFFSET, v);
+  add("irica", "گمرک ایران", irica);
+  const six = code.length === 8 ? code.slice(0, 6) : code;
+  const atlasValues = { X: {}, M: {} };
+  for (const [hs6, rows] of Object.entries(t.atlas)) {
+    if (!hs6.startsWith(six)) continue;
+    for (const [y, x, m] of rows) {
+      sumInto(atlasValues.X, y, x);
+      sumInto(atlasValues.M, y, m);
+    }
+  }
+  add("atlas", "اطلس (تطبیق دوطرفه)", atlasValues);
+  if (pre) series.push(...pre.comtrade);
+  const years = [...new Set(series.flatMap((s) => Object.keys(s.values).map(Number)))].sort((a, b) => a - b);
+  const compare = {
+    years, series,
+    irica_months: Object.fromEntries(Object.entries(periods).map(([y, m]) => [Number(y) + YEAR_OFFSET, m])),
+  };
+
+  // ---- Iran Customs detail, latest year
+  const rows = t.rows.filter((r) => match[r[3]]);
+  const latest = rows.length ? Math.max(...rows.map((r) => r[0])) : null;
+  let iran = null;
+  if (latest) {
+    iran = { year_fa: latest, year: latest + YEAR_OFFSET, flows: {} };
+    for (const [fi, flow] of FLOW_CODES.entries()) {
+      const cur = rows.filter((r) => r[0] === latest && r[1] === fi);
+      const value = cur.reduce((s, r) => s + r[4], 0);
+      if (!value) continue;
+      const kg = cur.reduce((s, r) => s + r[5], 0);
+      const prev = rows.filter((r) => r[0] === latest - 1 && r[1] === fi).reduce((s, r) => s + r[4], 0);
+      const comparable = periods[latest - 1]?.[flow] === periods[latest]?.[flow];
+      const byPartner = {};
+      for (const r of cur) {
+        const acc = (byPartner[r[2]] ||= [0, 0]);
+        acc[0] += r[4];
+        acc[1] += r[5];
+      }
+      const byOffice = {};
+      for (const [y, f, ci, oi, v] of d.offices) if (y === latest && f === fi && match[ci]) sumInto(byOffice, oi, v);
+      iran.flows[flow] = {
+        value, kg, months: periods[latest]?.[flow], unit_price: kg ? value / kg : null,
+        growth: prev && comparable ? value / prev - 1 : null,
+        partners: Object.entries(byPartner).sort((a, b) => b[1][0] - a[1][0]).slice(0, 25).map(([pi, [v, k]]) => ({
+          country: country(meta.partners[pi]), value: v, kg: k, share: v / value, unit_price: k ? v / k : null })),
+        offices: Object.entries(byOffice).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([oi, v]) => ({
+          name: meta.offices[oi], value: v, share: v / value })),
+      };
+    }
+    if (code.length < 8) {
+      const lines = {};
+      for (const r of rows) {
+        if (r[0] !== latest) continue;
+        const acc = (lines[r[3]] ||= { X: 0, M: 0 });
+        acc[FLOW_CODES[r[1]]] += r[4];
+      }
+      iran.lines = Object.entries(lines).sort((a, b) => b[1].X + b[1].M - (a[1].X + a[1].M)).slice(0, 40)
+        .map(([ci, v]) => ({ code: t.codes[ci], name_fa: idx.get(t.codes[ci])?.name_fa || null, X: v.X || null, M: v.M || null }));
+    }
+  }
+
+  // ---- partner x year matrix
+  const destinations = {};
+  for (const [fi, flow] of FLOW_CODES.entries()) {
+    const by = {};
+    for (const r of rows) if (r[1] === fi) sumInto((by[r[2]] ||= {}), r[0], r[4]);
+    const ys = [...new Set(Object.values(by).flatMap((v) => Object.keys(v).map(Number)))].sort((a, b) => a - b);
+    if (!ys.length) { destinations[flow] = null; continue; }
+    const recent = ys.slice(-3);
+    const ranked = Object.entries(by).sort((a, b) => recent.reduce((s, y) => s + (b[1][y] || 0), 0) - recent.reduce((s, y) => s + (a[1][y] || 0), 0));
+    destinations[flow] = {
+      years: ys.map((y) => ({ year_fa: y, months: periods[y]?.[flow] })),
+      rows: ranked.slice(0, 15).map(([pi, values]) => ({ country: country(meta.partners[pi]), values })),
+      others: Math.max(0, ranked.length - 15),
+    };
+  }
+
+  // ---- provinces (Trade Promotion Organization)
+  let provinces = null;
+  const prows = d.province.filter((r) => match[r[2]]);
+  if (prows.length) {
+    const tpo = Object.fromEntries(Object.entries(meta.tpo_years).map(([y, m]) => [Number(y), m]));
+    const full = Object.keys(tpo).map(Number).filter((y) => tpo[y] === 12);
+    let year = full.length ? Math.max(...full) : Math.max(...Object.keys(tpo).map(Number));
+    if (!prows.some((r) => r[0] === year)) year = Math.max(...prows.map((r) => r[0]));
+    const history = {};
+    const current = {};
+    for (const [y, vi, , v, kg] of prows) {
+      sumInto((history[vi] ||= {}), y, v);
+      if (y === year) {
+        const acc = (current[vi] ||= [0, 0]);
+        acc[0] += v;
+        acc[1] += kg;
+      }
+    }
+    const total = Object.values(current).reduce((s, a) => s + a[0], 0);
+    provinces = {
+      year_fa: year, months: tpo[year],
+      years: Object.keys(tpo).map(Number).sort((a, b) => a - b).map((y) => ({ year_fa: y, months: tpo[y] })),
+      rows: Object.entries(current).sort((a, b) => b[1][0] - a[1][0]).map(([vi, [v, kg]]) => ({
+        province: meta.provinces[vi], value: v, kg, share: total ? v / total : null,
+        unit_price: kg ? v / kg : null, history: history[vi] })),
+    };
+  }
+
+  // ---- month by month
+  const months = {};
+  for (const [y, m, f, ci, v] of d.monthly) if (match[ci]) sumInto((months[`${y}-${m}`] ||= { year_fa: y, month: m }), FLOW_CODES[f], v);
+  const monthly = Object.values(months).sort((a, b) => a.year_fa - b.year_fa || a.month - b.month);
+
+  // ---- competitiveness metrics
+  let metrics = null;
+  if (code.length >= 4) {
+    const m = mx.metrics[code.slice(0, 4)];
+    const s = mx.stats[worldCode || code.slice(0, 4)] || mx.stats[code.slice(0, 4)];
+    if (m || s) metrics = { heading: code.slice(0, 4), ...(m || {}), world_trade: s?.world_trade, world_cagr5: s?.cagr5, stats_code: s?.hs };
+  }
+
+  // ---- prices: customs unit values per year, plus benchmarks in the same heading
+  const unitValues = (fi) => {
+    const by = {};
+    for (const r of rows) {
+      if (r[1] !== fi) continue;
+      const acc = (by[r[0]] ||= [0, 0]);
+      acc[0] += r[4];
+      acc[1] += r[5];
+    }
+    return Object.entries(by).filter(([, [, kg]]) => kg).map(([y, [v, kg]]) => ({
+      year_fa: Number(y), value: v, kg, usd_kg: v / kg, months: periods[y]?.[FLOW_CODES[fi]] }))
+      .sort((a, b) => a.year_fa - b.year_fa);
+  };
+  let prices = { export: unitValues(0), import: unitValues(1), world: [], ime: [] };
+  try {
+    const bench = code.length >= 4 ? (await loadData("prices")).by_heading[code.slice(0, 4)] || [] : [];
+    for (const b of bench) {
+      const item = { ...b, exact: code.startsWith(b.hs) || b.hs.startsWith(code) };
+      (b.source === "wb" ? prices.world : prices.ime).push(item);
+    }
+  } catch { /* the build may ship without prices */ }
+
+  const warnings = [];
+  if (worldCode && !pre) {
+    warnings.push("داده‌ی بازار جهانی این کالا در نسخه‌ی آنلاین نیست؛ فقط برای کالاهای اصلی صادراتی و وارداتی ایران از قبل گرفته شده است. نسخه‌ی کامل روی سرور آن را برای هر کالایی می‌گیرد.");
+  }
+  return {
+    code, level: code.length, name_fa: nameFa, name_en: (info && info.name_en) || (worldCode && idx.get(worldCode)?.name_en) || null,
+    chapter: chapterInfo(meta, code), ancestors, world_code: worldCode, warnings, compare, iran,
+    world: pre ? pre.world : null, world_basis: pre ? pre.world.code : null, metrics, destinations, provinces, monthly, prices,
+    links: [
+      { name: "Trade Map", url: "https://www.trademap.org/", note: `واردکنندگان، رقبا و قیمت واحد؛ کد ${worldCode || code} را جستجو کنید` },
+      { name: "Market Access Map", url: "https://www.macmap.org/", note: `تعرفه‌ی کشور مقصد برای کالای ایرانی با کد ${worldCode || code}` },
+      { name: "سامانه مقررات تجاری", url: "https://crs.ntsw.ir/", note: `شرایط ورود و صدور ردیف تعرفه‌ی ${code} در ایران` },
+      { name: "Export Potential Map", url: "https://exportpotential.intracen.org/", note: "پتانسیل صادراتی ایران به تفکیک بازار" },
+      { name: "UN Comtrade", url: "https://comtradeplus.un.org/", note: "داده‌ی خام و ماهانه" },
+    ],
+  };
+}
+
+// ------------------------------------------------------------------ statistics book
+const DIMENSION_KEYS = ["hs2", "hs4", "hs6", "hs8", "partner", "office", "province", "year", "month"];
+
+async function staticOptions() {
+  const [meta, g] = await Promise.all([loadData("meta"), loadData("global")]);
+  const totals = {};
+  for (const [, , pi, v] of g.partner) sumInto(totals, pi, v);
+  const partners = Object.keys(totals).sort((a, b) => totals[b] - totals[a]).map((pi) => countryOf(meta, meta.partners[pi]));
+  return { irica_years: meta.periods, tpo_years: meta.tpo_years, partners, offices: meta.offices, provinces: meta.provinces };
+}
+
+async function chaptersFor(meta, hs) {
+  const list = hs.length >= 2 ? meta.chapters.filter((c) => c === hs.slice(0, 2)) : meta.chapters.filter((c) => c.startsWith(hs));
+  return list;
+}
+
+async function staticExplore(q) {
+  const meta = await loadData("meta");
+  const flow = q.get("flow") || "X";
+  const rowsDim = q.get("rows") || "partner";
+  const colsDim = q.get("cols") || null;
+  const hs = (q.get("hs") || "").replace(/\D/g, "");
+  const filters = { partner: q.get("partner") || "", office: q.get("office") || "", province: normFa(q.get("province") || "") };
+  const limit = Number(q.get("limit") || 300);
+  if (!DIMENSION_KEYS.includes(rowsDim) || (colsDim && !["year", "month"].includes(colsDim)) || colsDim === rowsDim) throw new Error("بُعد نامعتبر");
+  if (!["X", "M"].includes(flow)) throw new Error("جهت نامعتبر");
+  const dims = new Set([rowsDim, colsDim].filter(Boolean));
+  const wantsPartner = dims.has("partner") || filters.partner;
+  const fi = FLOW_CODES.indexOf(flow);
+
+  let table = "trade";
+  if (dims.has("province") || filters.province) {
+    if (wantsPartner || dims.has("office") || filters.office) throw new Error("آمار استانی کشور مقصد و گمرک ندارد؛ استان را با کشور یا گمرک ترکیب نکنید.");
+    if (flow !== "X") throw new Error("آمار استانی فقط برای صادرات منتشر شده است.");
+    table = "province_trade";
+  } else if (dims.has("office") || dims.has("month") || filters.office) {
+    if (wantsPartner) throw new Error("در نسخه‌ی آنلاین، گمرک و ماه را نمی‌شود با کشور ترکیب کرد؛ این ترکیب در نسخه‌ی کامل روی سرور هست.");
+    if ((dims.has("office") || filters.office) && dims.has("month")) throw new Error("در نسخه‌ی آنلاین، گمرک و ماه را نمی‌شود با هم ترکیب کرد.");
+    table = "customs_detail";
+  }
+  const periods = periodsOf(meta);
+  const available = (table === "province_trade" ? Object.keys(meta.tpo_years).map(Number)
+    : Object.entries(periods).filter(([, m]) => flow in m).map(([y]) => Number(y))).sort((a, b) => a - b);
+  if (!available.length) return { table, rows: [], columns: [], available: [], total: null };
+  const qTo = Number(q.get("to")), qFrom = Number(q.get("from"));
+  const yearTo = available.includes(qTo) ? qTo : available[available.length - 1];
+  const defaultFrom = dims.has("year") ? available[0] : yearTo;
+  const yearFrom = available.includes(qFrom) && qFrom <= yearTo ? qFrom : defaultFrom;
+
+  // ---- records: {y, m, hs, p, o, v, kg}; each source carries only the fields it has
+  let records = [];
+  const g = await loadData("global");
+  const needsDetail = hs || (table === "trade" && filters.partner && rowsDim.startsWith("hs"));
+  if (table === "trade") {
+    if (needsDetail) {
+      const chs = hs ? await chaptersFor(meta, hs) : meta.chapters;
+      for (const ch of chs) {
+        const t = await loadData(`t/${ch}`);
+        for (const [y, f, pi, ci, v, kg] of t.rows) if (f === fi) records.push({ y, hs: t.codes[ci], p: meta.partners[pi], v, kg });
+      }
+    } else if (rowsDim.startsWith("hs")) {
+      for (const [y, f, code, v, kg] of g.hs8) if (f === fi) records.push({ y, hs: code, v, kg });
+    } else {
+      for (const [y, f, pi, v, kg] of g.partner) if (f === fi) records.push({ y, p: meta.partners[pi], v, kg });
+    }
+  } else if (table === "customs_detail") {
+    const byOffice = dims.has("office") || filters.office;
+    if (hs) {
+      for (const ch of await chaptersFor(meta, hs)) {
+        const [t, d] = await chapterTables(meta, ch);
+        if (byOffice) for (const [y, f, ci, oi, v, kg] of d.offices) { if (f === fi) records.push({ y, hs: t.codes[ci], o: meta.offices[oi], v, kg }); }
+        else for (const [y, m, f, ci, v] of d.monthly) { if (f === fi) records.push({ y, m, hs: t.codes[ci], v, kg: null }); }
+      }
+    } else if (byOffice) {
+      for (const [y, f, oi, v, kg] of g.office) if (f === fi) records.push({ y, o: meta.offices[oi], v, kg });
+    } else {
+      for (const [y, m, f, v, kg] of g.month) if (f === fi) records.push({ y, m, v, kg });
+    }
+  } else {
+    if (hs) {
+      if (dims.has("month")) throw new Error("در نسخه‌ی آنلاین، استان و ماه برای یک کالای خاص با هم در دسترس نیست.");
+      for (const ch of await chaptersFor(meta, hs)) {
+        const [t, d] = await chapterTables(meta, ch);
+        for (const [y, vi, ci, v, kg] of d.province) records.push({ y, hs: t.codes[ci], prov: meta.provinces[vi], v, kg });
+      }
+    } else {
+      for (const [y, m, vi, v, kg] of g.province) records.push({ y, m, prov: meta.provinces[vi], v, kg });
+    }
+  }
+
+  records = records.filter((r) => r.y >= yearFrom && r.y <= yearTo
+    && (!hs || (r.hs && r.hs.startsWith(hs)))
+    && (!filters.partner || r.p === filters.partner)
+    && (!filters.office || r.o === filters.office)
+    && (!filters.province || r.prov === filters.province));
+
+  const keyOf = (dim, r) => ({
+    hs2: () => r.hs.slice(0, 2), hs4: () => r.hs.slice(0, 4), hs6: () => r.hs.slice(0, 6), hs8: () => r.hs,
+    partner: () => r.p, office: () => r.o, province: () => r.prov, year: () => r.y, month: () => r.m,
+  })[dim]();
+  const pivot = new Map();
+  const columns = new Set();
+  const hasKg = records.some((r) => r.kg != null);
+  for (const r of records) {
+    const k = keyOf(rowsDim, r);
+    if (k == null) continue;
+    const c = colsDim ? keyOf(colsDim, r) : 0;
+    const row = pivot.get(k) || { values: {}, value: 0, kg: 0 };
+    row.values[c] = (row.values[c] || 0) + r.v;
+    row.value += r.v;
+    row.kg += r.kg || 0;
+    pivot.set(k, row);
+    columns.add(c);
+  }
+  const totalValue = [...pivot.values()].reduce((s, r) => s + r.value, 0);
+  const totalKg = hasKg ? [...pivot.values()].reduce((s, r) => s + r.kg, 0) : null;
+  let ordered = [...pivot.entries()];
+  ordered = ["year", "month"].includes(rowsDim) ? ordered.sort((a, b) => a[0] - b[0]) : ordered.sort((a, b) => b[1].value - a[1].value);
+  const idx = rowsDim.startsWith("hs") ? await productIndex() : null;
+  const label = (k) => {
+    if (rowsDim === "partner") return { label: null, country: countryOf(meta, k) };
+    if (rowsDim === "year") return { label: String(k) };
+    if (rowsDim === "month") return { label: MONTH_NAMES[k] || String(k) };
+    if (rowsDim === "hs2") return { label: meta.chapters_fa[k] || k };
+    if (rowsDim.startsWith("hs")) {
+      const p = idx.get(k);
+      const fallback = rowsDim === "hs6" ? idx.get(k + "00") : null;
+      return { label: (p && p.name_fa) || (fallback && fallback.name_fa) || (p && p.name_en) || "", label_en: p ? p.name_en : null };
+    }
+    return { label: k };
+  };
+  const colLabel = (c) => (colsDim === "month" ? MONTH_NAMES[c] || String(c) : String(c));
+  return {
+    table, flow, rows_dim: rowsDim, cols_dim: colsDim, year_from: yearFrom, year_to: yearTo, available,
+    columns: colsDim ? [...columns].sort((a, b) => a - b).map((c) => ({ key: c, label: colLabel(c) })) : [],
+    rows: ordered.slice(0, limit).map(([k, r]) => ({
+      key: k, ...label(k), values: colsDim ? r.values : {}, value: r.value, kg: hasKg ? r.kg : null,
+      share: totalValue ? r.value / totalValue : null, unit_price: hasKg && r.kg ? r.value / r.kg : null,
+    })),
+    row_count: pivot.size, total: { value: totalValue, kg: totalKg },
+  };
+}
+
+
+const main = document.getElementById("view");
+// The server-less build (Claude Artifact) answers API calls from bundled data files.
+const STATIC = Boolean(window.RAHKAR_STATIC);
+
+// ------------------------------------------------------------------ DOM helper
+// Text always goes in as text nodes: names come from external data.
+function h(tag, props, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "style") el.style.cssText = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat(Infinity)) {
+    if (c == null || c === false) continue;
+    el.append(c instanceof Node ? c : document.createTextNode(String(c)));
+  }
+  return el;
+}
+
+// ------------------------------------------------------------------ formatting
+const nf = (d) => new Intl.NumberFormat("fa-IR", { maximumFractionDigits: d });
+const nf0 = nf(0), nf1 = nf(1), nf2 = nf(2);
+const plain = new Intl.NumberFormat("fa-IR", { useGrouping: false });
+
+function usd(v, unit = " دلار") {
+  if (v == null || !isFinite(v)) return "—";
+  if (v < 0) return `منفی ${usd(-v, unit)}`;
+  const a = Math.abs(v);
+  if (a >= 1e9) return `${nf1.format(v / 1e9)} میلیارد${unit}`;
+  if (a >= 1e6) return `${nf1.format(v / 1e6)} میلیون${unit}`;
+  if (a >= 1e3) return `${nf0.format(v / 1e3)} هزار${unit}`;
+  return `${nf0.format(v)}${unit}`;
+}
+const usdShort = (v) => usd(v, "");
+function pct(v, digits = 1) {
+  if (v == null || !isFinite(v)) return "—";
+  return `${nf(digits).format(v * 100)}٪`;
+}
+// Signed figures are wrapped in a left-to-right isolate so the sign stays in front of the number.
+const ltr = (text) => `\u2066${text}\u2069`;
+function signed(v) {
+  if (v == null || !isFinite(v)) return "—";
+  return ltr(`${v > 0 ? "+" : v < 0 ? "−" : ""}${pct(Math.abs(v))}`);
+}
+function tons(kg) {
+  if (kg == null || !isFinite(kg)) return "—";
+  const t = kg / 1000;
+  if (t >= 1e6) return `${nf1.format(t / 1e6)} میلیون تن`;
+  if (t >= 1e3) return `${nf1.format(t / 1e3)} هزار تن`;
+  return `${nf0.format(t)} تن`;
+}
+const price = (v) => (v == null || !isFinite(v) ? "—" : `${nf2.format(v)} $/کیلو`);
+const num = (v, d = 2) => (v == null || !isFinite(v) ? "—" : nf(d).format(v));
+const yfa = (y) => plain.format(y);
+const OFFSET = 621;
+const solar = (y) => yfa(y - OFFSET);
+const both = (y) => `${yfa(y)} (${solar(y)})`;
+
+const regionNames = (() => {
+  try { return new Intl.DisplayNames(["fa"], { type: "region" }); } catch { return null; }
+})();
+function country(c) {
+  if (!c) return "—";
+  if (c.iso2 && regionNames) {
+    try {
+      const n = regionNames.of(c.iso2);
+      if (n && n !== c.iso2) return n;
+    } catch { /* unknown region */ }
+  }
+  return c.name_fa || c.name_en || c.iso3;
+}
+const productHref = (code) => `#/product/${code}`;
+const codeEl = (code) => h("a", { class: "code", href: productHref(code) }, code);
+const countryHref = (c) => (c && /^[A-Z]{3}$/.test(c.iso3) && !c.iso3.startsWith("X") ? `#/country/${c.iso3}` : null);
+function countryLink(c) {
+  const href = countryHref(c);
+  return href ? h("a", { href }, country(c)) : country(c);
+}
+const provinceHref = (name) => `#/province/${encodeURIComponent(name)}`;
+const MONTHS = ["کل دوره", "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+const periodLabel = (y, months) => `${yfa(y)}${months && months < 12 ? ` (${yfa(months)} ماهه)` : ""}`;
+
+// Artifacts can't start downloads, so there the table is copied for pasting into Excel.
+async function copyTable(header, rows) {
+  const text = [header, ...rows].map((r) => r.map((v) => String(v ?? "").replace(/[\t\n]/g, " ")).join("\t")).join("\n");
+  await navigator.clipboard.writeText(text);
+}
+
+// CSV with a BOM so Excel opens Persian text correctly.
+function downloadCsv(filename, header, rows) {
+  const esc = (v) => {
+    const t = v == null ? "" : String(v);
+    return /[",\n]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
+  };
+  const body = [header, ...rows].map((r) => r.map(esc).join(",")).join("\r\n");
+  const url = URL.createObjectURL(new Blob(["\ufeff" + body], { type: "text/csv;charset=utf-8" }));
+  const a = h("a", { href: url, download: filename });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// A product x year (or country x year) matrix with a value per cell.
+function matrix(rows, years, { label, valueOf, flow }) {
+  const head = h("tr", {}, h("th", {}, ""), years.map((y) => h("th", { class: "num" }, periodLabel(y.year_fa, y.months))));
+  const body = rows.map((r) => h("tr", {}, h("td", {}, label(r)), years.map((y) => {
+    const v = valueOf(r, y.year_fa);
+    return h("td", { class: "num" }, v ? usd(v) : h("span", { class: "muted" }, "—"));
+  })));
+  return h("div", { class: "table-wrap" }, h("table", { class: "matrix", "data-flow": flow }, h("thead", {}, head), h("tbody", {}, body)));
+}
+
+// ------------------------------------------------------------------ data
+async function api(path, opts) {
+  if (STATIC) return staticApi(path);
+  const res = await fetch(path, opts);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+// ------------------------------------------------------------------ building blocks
+function tile(label, value, delta, color) {
+  return h("div", { class: "card tile" },
+    h("div", { class: "label" }, color && h("span", { class: "key", style: `background:${color}` }), label),
+    h("div", { class: "value" }, value),
+    delta && h("div", { class: "delta" }, delta));
+}
+
+function growthEl(g, note) {
+  if (g == null) return note ? h("span", { class: "muted" }, note) : null;
+  return h("span", {}, h("span", { class: g >= 0 ? "up" : "down" }, `${g >= 0 ? "▲" : "▼"} ${signed(g)}`), " نسبت به سال قبل");
+}
+
+function card(title, sub, ...body) {
+  return h("div", { class: "card" }, h("h3", {}, title), sub ? h("p", { class: "card-sub" }, sub) : h("div", { style: "height:10px" }), ...body);
+}
+
+function section(title, sub, ...body) {
+  return h("section", { class: "section" }, h("h2", {}, title), sub && h("p", { class: "sub" }, sub), ...body);
+}
+
+// columns: [{label, key?, num?, value(row) -> sortable, render(row) -> node|text}]
+function table(columns, rows, { sort } = {}) {
+  let state = sort ? { ...sort } : null;
+  const tbody = h("tbody");
+  const ths = columns.map((c, i) => {
+    const th = h("th", { class: [c.num && "num", c.value && "sortable"].filter(Boolean).join(" ") }, c.label);
+    if (c.value) {
+      th.addEventListener("click", () => {
+        state = { index: i, dir: state && state.index === i ? -state.dir : -1 };
+        render();
+      });
+    }
+    return th;
+  });
+  function render() {
+    let list = rows;
+    if (state) {
+      const col = columns[state.index];
+      list = [...rows].sort((a, b) => {
+        const va = col.value(a), vb = col.value(b);
+        if (va == null) return 1;
+        if (vb == null) return -1;
+        const c = va > vb ? 1 : va < vb ? -1 : 0;
+        return state.dir === -1 ? -c : c;
+      });
+      ths.forEach((th, i) => th.classList.toggle("sorted", i === state.index));
+    }
+    tbody.replaceChildren(...list.map((r, idx) => h("tr", {}, columns.map((c) =>
+      h("td", { class: c.num ? "num" : c.wide ? "wide" : null }, c.render ? c.render(r, idx) : r[c.key])))));
+  }
+  render();
+  return h("div", { class: "table-wrap" }, h("table", {}, h("thead", {}, h("tr", {}, ths)), tbody));
+}
+
+function meter(share, max = 1) {
+  const w = share == null ? 0 : Math.min(100, (100 * share) / (max || 1));
+  return h("span", { class: "meter" }, h("span", { class: "m-track" }, h("span", { class: "m-fill", style: `width:${w}%` })), pct(share));
+}
+
+function empty(text, link) {
+  return h("div", { class: "card empty" }, text, link && h("div", {}, h("a", { href: link[1] }, link[0])));
+}
+
+// ------------------------------------------------------------------ views
+async function viewOverview(params) {
+  const year = params.get("year");
+  const data = await api(`/api/overview${year ? `?year=${year}` : ""}`);
+  const ir = data.irica;
+  if (!ir && !data.atlas_series.length) {
+    return h("div", {}, h("h1", {}, "هنوز داده‌ای بارگذاری نشده"),
+      empty("از صفحه‌ی منابع داده، همگام‌سازی را اجرا کنید.", ["رفتن به منابع داده", "#/sources"]));
+  }
+  const root = h("div", {});
+  root.append(h("h1", {}, "نمای کلی تجارت خارجی ایران"),
+    h("p", { class: "sub" }, "آمار رسمی گمرک ایران در کنار داده‌ی تطبیق‌شده‌ی اطلس پیچیدگی اقتصادی هاروارد."));
+
+  if (ir) {
+    const sel = h("select", { onchange: (e) => { go(`/?year=${e.target.value}`); } },
+      data.periods.map((p) => {
+        const m = Math.min(p.months.X || 12, p.months.M || 12);
+        return h("option", { value: p.year_fa, selected: p.year_fa === ir.year_fa }, `${yfa(p.year_fa)}${m < 12 ? ` (${yfa(m)} ماهه)` : ""}`);
+      }));
+    root.append(h("div", { class: "filters" }, h("label", {}, "سال (آمار گمرک)", sel)));
+
+    const X = ir.flows.X, M = ir.flows.M;
+    const partial = (f) => (f && f.months < 12 ? `${yfa(f.months)} ماهه‌ی ` : "");
+    const flowDelta = (f) => h("span", {}, growthEl(f?.growth, f && f.months < 12 ? "دوره‌ی ناقص؛ با سال قبل مقایسه نمی‌شود" : null),
+      f?.gap ? h("div", { class: "muted" }, `ریز اقلام منتشرشده: ${usd(f.gap.lines)}`) : null);
+    root.append(h("div", { class: "grid cols-4" },
+      tile(`صادرات ${partial(X)}${yfa(ir.year_fa)}`, usd(X?.headline ?? X?.value), flowDelta(X), "var(--export)"),
+      tile(`واردات ${partial(M)}${yfa(ir.year_fa)}`, usd(M?.headline ?? M?.value), flowDelta(M), "var(--import)"),
+      (() => {
+        const bal = (X?.headline ?? X?.value ?? 0) - (M?.headline ?? M?.value ?? 0);
+        return tile(bal < 0 ? "کسری تراز تجاری" : "مازاد تراز تجاری", usd(Math.abs(bal)), h("span", { class: "muted" }, "صادرات منهای واردات"));
+      })(),
+      tile("وزن صادرات", tons(X?.kg), h("span", { class: "muted" }, `وزن واردات: ${tons(M?.kg)}`))));
+    root.append(h("p", { class: "note small", style: "margin-top:12px" },
+      "ارقام صادرات گمرک «صادرات غیرنفتی» است و نفت خام را شامل نمی‌شود. سال‌ها شمسی‌اند (۱۴۰۳ ≈ فروردین ۱۴۰۳ تا اسفند ۱۴۰۳)."));
+    for (const [flow, f] of Object.entries(ir.flows)) {
+      if (f.gap) root.append(h("div", { class: "banner" },
+        `جمع ${flow === "X" ? "صادرات" : "واردات"} اعلام‌شده در فایل گمرک ${usd(f.gap.declared)} است، ولی ردیف‌های جزئی منتشرشده فقط ${usd(f.gap.lines)} را پوشش می‌دهند (${pct(f.gap.missing_share, 0)} منتشر نشده، احتمالاً اقلام محرمانه). همه‌ی تفکیک‌ها بر اساس ردیف‌های منتشرشده است.`));
+    }
+
+    const partnerBars = (f, color) => barList(f.partners.map((p) => ({ label: country(p.country), value: p.value, href: countryHref(p.country) })), {
+      color, format: usdShort,
+      tip: (d) => [{ label: "ارزش", value: usd(d.value) }, { label: "سهم", value: pct(d.value / f.value) }],
+    });
+    root.append(section("شرکای تجاری", `سال ${yfa(ir.year_fa)}، به میلیون/میلیارد دلار`, h("div", { class: "grid cols-2" },
+      X ? card("مقصدهای اصلی صادرات", null, partnerBars(X, "var(--export)")) : null,
+      M ? card("مبدأهای اصلی واردات", null, partnerBars(M, "var(--import)")) : null)));
+
+    const productTable = (f) => table([
+      { label: "کد", render: (r) => codeEl(r.code) },
+      { label: "کالا", wide: true, render: (r) => r.name_fa || "—" },
+      { label: "ارزش", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+      { label: "سهم", num: true, value: (r) => r.value, render: (r) => pct(r.value / f.value) },
+    ], f.products);
+    root.append(section("کالاهای اصلی", "ردیف‌های ۸ رقمی تعرفه؛ روی کد بزنید تا تحلیل کامل آن کالا را ببینید.", h("div", { class: "grid cols-2" },
+      X ? card("صادرات", null, productTable(X)) : null,
+      M ? card("واردات", null, productTable(M)) : null)));
+
+    const chapterBars = (f, color) => barList(f.chapters.map((c) => ({ label: `${c.code} · ${c.name_fa || ""}`, value: c.value, href: productHref(c.code) })), {
+      color, format: usdShort, tip: (d) => [{ label: "سهم", value: pct(d.value / f.value) }],
+    });
+    root.append(section("به تفکیک فصل تعرفه", null, h("div", { class: "grid cols-2" },
+      X ? card("صادرات", null, chapterBars(X, "var(--export)")) : null,
+      M ? card("واردات", null, chapterBars(M, "var(--import)")) : null)));
+  }
+
+  if (data.irica_series.length > 1) {
+    const s = data.irica_series;
+    root.append(section(`روند از آمار گمرک ${yfa(s[0].year_fa)} تا ${yfa(s[s.length - 1].year_fa)}`,
+      "صادرات غیرنفتی و واردات؛ سال‌هایی که گمرک منتشر نکرده خالی مانده‌اند و سال جاری ممکن است ناقص باشد.",
+      card("", null, lineChart([
+        { name: "صادرات", color: "var(--export)", points: s.map((r) => ({ x: r.year_fa, y: r.X })) },
+        { name: "واردات", color: "var(--import)", points: s.map((r) => ({ x: r.year_fa, y: r.M })) },
+      ], { format: usdShort, tickFormat: (v) => (v ? usdShort(v) : "۰"), xFormat: (y) => periodLabel(y, Math.min(s.find((r) => r.year_fa === y)?.months?.X || 12, 12)), maxGap: 1 }))));
+  }
+
+  if (data.atlas_series.length) {
+    const s = data.atlas_series;
+    const chart = lineChart([
+      { name: "صادرات", color: "var(--export)", points: s.map((r) => ({ x: r.year, y: r.X })) },
+      { name: "واردات", color: "var(--import)", points: s.map((r) => ({ x: r.year, y: r.M })) },
+    ], { format: usdShort, tickFormat: (v) => (v ? usdShort(v) : "۰"), xFormat: yfa });
+    const years = data.irica_series.map((r) => r.year);
+    const atlasBy = Object.fromEntries(s.map((r) => [r.year, r]));
+    const cmp = table([
+      { label: "سال", render: (r) => both(r.year) },
+      { label: "صادرات – گمرک", num: true, render: (r) => usd(r.X) + (r.months?.X < 12 ? ` (${yfa(r.months.X)} ماه)` : "") },
+      { label: "صادرات – اطلس", num: true, render: (r) => usd(atlasBy[r.year]?.X) },
+      { label: "واردات – گمرک", num: true, render: (r) => usd(r.M) + (r.months?.M < 12 ? ` (${yfa(r.months.M)} ماه)` : "") },
+      { label: "واردات – اطلس", num: true, render: (r) => usd(atlasBy[r.year]?.M) },
+    ], data.irica_series.filter((r) => years.includes(r.year)));
+    root.append(section(`روند ${yfa(s[0].year)} تا ${yfa(s[s.length - 1].year)}`, "اطلس هاروارد، همه‌ی کالاها (شامل نفت)، میلیارد دلار",
+      card("صادرات و واردات کالایی ایران", "اطلس تجارت ایران را از گزارش کشورهای طرف معامله بازسازی می‌کند؛ در سال‌های اخیر بخش بزرگی از تجارت ایران (به‌ویژه نفت و تجارت از مسیر واسطه‌ها) در آن دیده نمی‌شود.", chart),
+      h("div", { style: "height:16px" }),
+      card("مقایسه‌ی منابع", "همان سال‌ها از دو منبع؛ اختلاف بزرگ یعنی به عدد اطلس برای ایران در سال‌های اخیر تکیه نکنید.", cmp)));
+  }
+  return root;
+}
+
+async function viewOpportunities(params) {
+  const mode = params.get("mode") === "existing" ? "existing" : "new";
+  const raw = params.get("raw") !== "0";
+  const min = Number(params.get("min") || 0);
+  const data = await api(`/api/opportunities?mode=${mode}&exclude_raw=${raw ? 1 : 0}&min_world=${min}&limit=200`);
+  const go = (patch) => {
+    const p = new URLSearchParams({ mode, raw: raw ? "1" : "0", min: String(min), ...patch });
+    go(`/opportunities?${p}`);
+  };
+  const root = h("div", {},
+    h("h1", {}, "فرصت‌های صادراتی"),
+    h("p", { class: "sub" }, mode === "new"
+      ? "کالاهایی که ایران هنوز در آن‌ها مزیت ندارد ولی به توانمندی‌های فعلی‌اش نزدیک‌اند و بازار جهانی بزرگ یا رو به رشدی دارند."
+      : "کالاهایی که ایران همین حالا در آن‌ها مزیت نسبی آشکار دارد (RCA ≥ ۱)، به ترتیب ارزش صادرات."),
+    h("div", { class: "filters" },
+      h("div", { class: "seg" },
+        h("button", { class: mode === "new" ? "on" : "", onclick: () => go({ mode: "new" }) }, "فرصت‌های تازه"),
+        h("button", { class: mode === "existing" ? "on" : "", onclick: () => go({ mode: "existing" }) }, "مزیت‌های فعلی")),
+      h("label", {}, h("input", { type: "checkbox", checked: raw, onchange: (e) => go({ raw: e.target.checked ? "1" : "0" }) }),
+        "حذف نفت، گاز، مواد معدنی خام و فلزات گران‌بها"),
+      h("label", {}, "حداقل اندازه‌ی بازار جهانی",
+        h("select", { onchange: (e) => go({ min: e.target.value }) },
+          [[0, "همه"], [5e9, "۵ میلیارد دلار"], [20e9, "۲۰ میلیارد دلار"], [100e9, "۱۰۰ میلیارد دلار"]].map(([v, l]) =>
+            h("option", { value: v, selected: v === min }, l))))));
+
+  if (!data.year) {
+    root.append(empty("شاخص‌های اطلس هنوز بارگذاری نشده‌اند.", ["رفتن به منابع داده", "#/sources"]));
+    return root;
+  }
+
+  const w = data.weights;
+  root.append(h("p", { class: "note small" },
+    `امتیاز (۰ تا ۱۰۰) از رتبه‌ی صدکی پنج شاخص ساخته می‌شود: نزدیکی به توانمندی‌های فعلی ایران ${pct(w.feasibility, 0)}، `,
+    `رشد پنج‌ساله‌ی بازار جهانی ${pct(w.growth, 0)}، اندازه‌ی بازار ${pct(w.size, 0)}، ارزش راهبردی برای تنوع‌بخشی (COG) ${pct(w.cog, 0)} و پیچیدگی کالا ${pct(w.complexity, 0)}. `,
+    `«مزیت» یعنی RCA ≥ ۱ در اطلس (${yfa(data.year)}) یا در آمار گمرک (${data.irica_year_fa ? yfa(data.irica_year_fa) : "—"}). سلاح و مهمات هیچ‌وقت نمایش داده نمی‌شوند. `,
+    "این فهرست نقطه‌ی شروع تحقیق است، نه توصیه‌ی تجاری."));
+
+  const rows = data.rows;
+  const cols = [
+    { label: "#", render: (_, i) => yfa(i + 1) },
+    { label: "کد", render: (r) => codeEl(r.hs) },
+    { label: "کالا", wide: true, render: (r) => h("span", {}, h("span", { class: "name" }, r.chapter.name_fa || ""), h("span", { class: "en" }, r.name_en || "")) },
+  ];
+  if (mode === "new") cols.push({ label: "امتیاز", num: true, value: (r) => r.score, render: (r) => h("span", { class: "meter" }, h("span", { class: "m-track" }, h("span", { class: "m-fill", style: `width:${r.score}%` })), num(r.score, 0)) });
+  cols.push(
+    { label: "بازار جهانی", num: true, value: (r) => r.world_trade, render: (r) => usd(r.world_trade) },
+    { label: "رشد سالانه ۵ ساله", num: true, value: (r) => r.cagr5, render: (r) => signed(r.cagr5) },
+    { label: `صادرات ایران (گمرک ${data.irica_year_fa ? yfa(data.irica_year_fa) : ""})`, num: true, value: (r) => r.irica_export, render: (r) => usd(r.irica_export) },
+    { label: `صادرات ایران (اطلس ${yfa(data.year)})`, num: true, value: (r) => r.iran_export, render: (r) => usd(r.iran_export) },
+    { label: "RCA گمرک", num: true, value: (r) => r.rca_irica, render: (r) => num(r.rca_irica) },
+    { label: "RCA اطلس", num: true, value: (r) => r.rca, render: (r) => num(r.rca) },
+    { label: "فاصله", num: true, value: (r) => r.distance, render: (r) => num(r.distance, 3) },
+  );
+  root.append(h("p", { class: "small muted" }, `${nf0.format(data.count)} کالای ۴ رقمی؛ ${nf0.format(rows.length)} مورد اول نمایش داده شده. روی عنوان ستون بزنید تا مرتب شود.`),
+    card("", null, table(cols, rows)));
+  return root;
+}
+
+async function viewProduct(params, code) {
+  const slow = setTimeout(() => {
+    main.replaceChildren(h("div", { class: "card empty" }, h("span", { class: "spinner" }), " در حال دریافت داده‌ی بازار جهانی از اطلس و Comtrade… بار اول برای هر کالا تا ۲۰ ثانیه طول می‌کشد."));
+    main.classList.remove("loading");
+  }, 600);
+  let data;
+  try {
+    data = await api(`/api/product/${code}`);
+  } finally {
+    clearTimeout(slow);
+  }
+  const root = h("div", {});
+  root.append(h("div", { class: "chips" },
+    data.ancestors.map((a) => h("a", { class: "chip", href: productHref(a.code) }, h("span", { class: "code" }, a.code), " ", a.name_fa || a.name_en || "")),
+    h("span", { class: "chip" }, h("span", { class: "code" }, data.code))));
+  root.append(h("h1", {}, data.name_fa || data.name_en || `کد ${data.code}`),
+    h("p", { class: "sub" }, h("span", { class: "code" }, data.code), data.name_fa && data.name_en ? [" · ", h("span", { class: "ltr" }, data.name_en)] : null,
+      data.world_code && data.world_code !== data.code ? ` · داده‌ی جهانی بر اساس کد ۶ رقمی ${data.world_code}` : null));
+  for (const w of data.warnings) root.append(h("div", { class: "banner" }, w));
+
+  const ir = data.iran, world = data.world;
+  const X = ir?.flows.X, M = ir?.flows.M;
+  const label = (f, word) => `${word} ایران (گمرک ${ir ? yfa(ir.year_fa) : ""}${f?.months < 12 ? `، ${yfa(f.months)} ماهه` : ""})`;
+  root.append(h("div", { class: "grid cols-4" },
+    tile(label(X, "صادرات"), usd(X?.value), X ? h("span", {}, `میانگین قیمت: ${price(X.unit_price)}`) : h("span", { class: "muted" }, "صادراتی ثبت نشده"), "var(--export)"),
+    tile(label(M, "واردات"), usd(M?.value), M ? h("span", {}, `میانگین قیمت: ${price(M.unit_price)}`) : h("span", { class: "muted" }, "وارداتی ثبت نشده"), "var(--import)"),
+    tile(`بازار جهانی واردات (${world ? yfa(world.year) : "—"})`, usd(world?.total_imports),
+      world ? h("span", {}, world.growth_years ? `رشد سالانه (${yfa(world.growth_years)} ساله): ${signed(world.cagr5)}` : "روند در دسترس نیست") : h("span", { class: "muted" }, "برای این سطح کد در دسترس نیست")),
+    tile("جایگاه ایران در صادرات جهانی", world?.iran?.rank ? `رتبه‌ی ${yfa(world.iran.rank)} از ${yfa(world.iran.of)}` : "—",
+      world ? h("span", {}, `سهم از صادرات جهان: ${pct(world.iran.share)}${world.median_price ? ` · میانه‌ی قیمت جهانی: ${price(world.median_price)}` : ""}`) : null)));
+
+  // ---- source comparison
+  const cmp = data.compare;
+  if (cmp.series.length) {
+    const years = cmp.years.slice(-8);
+    const flowName = { X: "صادرات", M: "واردات" };
+    const head = h("tr", {}, h("th", {}, "منبع"), years.map((y) => h("th", { class: "num" }, both(y), cmp.irica_months[y] && Math.min(cmp.irica_months[y].X || 12, cmp.irica_months[y].M || 12) < 12 ? " *" : "")));
+    const body = cmp.series.map((s) => h("tr", {}, h("td", {}, `${flowName[s.flow]} – ${s.label}`), years.map((y) => h("td", { class: "num" }, usd(s.values[y])))));
+    root.append(section("مقایسه‌ی منابع", "تجارت ایران در این کالا، سال به سال، از دید هر منبع. * دوره‌ی ناقص (کمتر از ۱۲ ماه) در آمار گمرک.",
+      card("", null, h("div", { class: "table-wrap" }, h("table", {}, h("thead", {}, head), h("tbody", {}, body))))));
+  }
+
+  // ---- Iran detail
+  if (ir) {
+    const partnerTable = (f) => table([
+      { label: "کشور", render: (r) => countryLink(r.country) },
+      { label: "ارزش", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+      { label: "سهم", num: true, value: (r) => r.share, render: (r) => meter(r.share) },
+      { label: "وزن", num: true, value: (r) => r.kg, render: (r) => tons(r.kg) },
+      { label: "قیمت هر کیلو", num: true, value: (r) => r.unit_price, render: (r) => price(r.unit_price) },
+    ], f.partners);
+    const officeBars = (f, color) => barList(f.offices.map((o) => ({ label: o.name, value: o.value })), {
+      color, format: usdShort, tip: (d) => [{ label: "سهم", value: pct(d.value / f.value) }],
+    });
+    root.append(section(`ایران – آمار گمرک ${yfa(ir.year_fa)}`, "به کدام کشورها می‌فروشیم، از کجا می‌خریم، با چه قیمتی و از کدام گمرک.",
+      h("div", { class: "grid" },
+        X ? card("مقصدهای صادرات", `قیمت هر کیلو = ارزش ÷ وزن اظهارشده`, partnerTable(X)) : null,
+        M ? card("مبدأهای واردات", `قیمت هر کیلو = ارزش ÷ وزن اظهارشده`, partnerTable(M)) : null),
+      h("div", { style: "height:16px" }),
+      h("div", { class: "grid cols-2" },
+        X?.offices.length ? card("گمرکات اصلی صادرات", null, officeBars(X, "var(--export)")) : null,
+        M?.offices.length ? card("گمرکات اصلی واردات", null, officeBars(M, "var(--import)")) : null)));
+    if (ir.lines?.length) {
+      root.append(section("ردیف‌های تعرفه‌ی ۸ رقمی", "زیرمجموعه‌های این کد در کتاب مقررات صادرات و واردات.",
+        card("", null, table([
+          { label: "کد", render: (r) => codeEl(r.code) },
+          { label: "شرح", wide: true, render: (r) => r.name_fa || "—" },
+          { label: "صادرات", num: true, value: (r) => r.X, render: (r) => usd(r.X) },
+          { label: "واردات", num: true, value: (r) => r.M, render: (r) => usd(r.M) },
+        ], ir.lines))));
+    }
+  }
+
+  // ---- every year, every partner
+  const dest = data.destinations;
+  if (dest?.X || dest?.M) {
+    const block = (f, title) => f ? card(title, f.others ? `${yfa(f.others)} کشور دیگر در جدول نیامده؛ برای همه در آمارنامه ببینید.` : null,
+      matrix(f.rows, f.years, { label: (r) => countryLink(r.country), valueOf: (r, y) => r.values[y], flow: "X" })) : null;
+    root.append(section("به تفکیک کشور و سال", "ارزش تجارت ایران در این کالا با هر کشور، در همه‌ی سال‌هایی که گمرک منتشر کرده است.",
+      h("div", { class: "grid" }, block(dest.X, "صادرات"), block(dest.M, "واردات")),
+      h("p", { class: "small" }, h("a", { href: `#/explore?rows=partner&cols=year&hs=${data.code}` }, "باز کردن در آمارنامه با همه‌ی کشورها و خروجی اکسل ←"))));
+  }
+
+  // ---- provinces
+  const pv = data.provinces;
+  if (pv?.rows.length) {
+    const years = pv.years.map((y) => y.year_fa);
+    root.append(section(`استان‌های صادرکننده – ${periodLabel(pv.year_fa, pv.months)}`,
+      "سازمان توسعه تجارت. استان محل اظهار صادرات است: برای کالایی که در گمرک داخلی همان استان اظهار شود تقریب خوبی از محل تولید است، ولی کالاهایی که از گمرکات مرزی خارج می‌شوند به استان مرزی نسبت داده می‌شوند.",
+      card("", null, table([
+        { label: "استان", render: (r) => h("a", { href: provinceHref(r.province) }, r.province) },
+        { label: "ارزش", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+        { label: "سهم", num: true, value: (r) => r.share, render: (r) => meter(r.share) },
+        { label: "قیمت هر کیلو", num: true, value: (r) => r.unit_price, render: (r) => price(r.unit_price) },
+        ...years.map((y) => ({ label: periodLabel(y, pv.years.find((x) => x.year_fa === y).months), num: true, value: (r) => r.history[y], render: (r) => usd(r.history[y]) })),
+      ], pv.rows))));
+  }
+
+  // ---- prices
+  const pr = data.prices;
+  if (pr && (pr.export.length || pr.import.length || pr.world.length || pr.ime.length)) {
+    const lines = [];
+    if (pr.export.length > 1) lines.push({ name: "صادرات ($ هر کیلو)", color: "var(--export)", points: pr.export.map((r) => ({ x: r.year_fa, y: r.usd_kg })) });
+    if (pr.import.length > 1) lines.push({ name: "واردات ($ هر کیلو)", color: "var(--import)", points: pr.import.map((r) => ({ x: r.year_fa, y: r.usd_kg })) });
+    const lastX = pr.export[pr.export.length - 1];
+    const bench = [...pr.world, ...pr.ime];
+    root.append(section("قیمت", "قیمت هر کیلو در صادرات و واردات ایران (گمرک) و قیمت‌های مرجع هم‌خانواده.",
+      lines.length ? card("روند قیمت هر کیلو", null, lineChart(lines, { format: (v) => perKg(v), tickFormat: (v) => nf(2).format(v), xFormat: yfa, maxGap: 1, height: 220 })) : null,
+      bench.length ? h("div", { style: "height:16px" }) : null,
+      bench.length ? card("قیمت‌های مرجع", lastX ? `در برابر قیمت صادراتی ایران در ${yfa(lastX.year_fa)}: ${perKg(lastX.usd_kg)} هر کیلو` : null, table([
+        { label: "سری", wide: true, render: (r) => h("span", {}, h("a", { href: priceHref(r.source, r.series) }, r.name_fa), " ", h("span", { class: "pill" }, SOURCE_NAMES[r.source]), r.exact ? null : h("span", { class: "muted small" }, ` (کد ${r.hs})`)) },
+        { label: "آخرین قیمت", num: true, render: (r) => (r.source === "ime" ? `${toman(r.value)}/کیلو` : h("span", {}, nf(2).format(r.value), " ", h("span", { class: "muted small ltr" }, r.unit))) },
+        { label: "دوره", num: true, render: (r) => r.period_fa || MONTHS_EN(r.period) },
+        { label: "دلار هر کیلو", num: true, render: (r) => perKg(r.usd_kg) },
+        { label: "اختلاف صادرات ایران", num: true, render: (r) => (lastX && r.usd_kg ? diffEl(lastX.usd_kg / r.usd_kg - 1) : "—") },
+        { label: "تغییر سالانه", num: true, render: (r) => diffEl(r.yoy) },
+        { label: "روند", render: (r) => sparkline(r.spark, { color: r.source === "ime" ? "var(--import)" : "var(--export)" }) },
+      ], bench)) : null));
+  }
+
+  // ---- monthly
+  if (data.monthly?.length > 2) {
+    const pts = data.monthly.map((r) => ({ ...r, x: r.year_fa * 12 + r.month - 1 }));
+    const chart = lineChart([
+      { name: "صادرات", color: "var(--export)", points: pts.map((r) => ({ x: r.x, y: r.X })) },
+      { name: "واردات", color: "var(--import)", points: pts.map((r) => ({ x: r.x, y: r.M })) },
+    ].filter((sr) => sr.points.some((p) => p.y)), {
+      format: usdShort, tickFormat: (v) => (v ? usdShort(v) : "۰"),
+      xFormat: (x) => `${MONTHS[(x % 12) + 1]} ${yfa(Math.floor(x / 12))}`, height: 240, maxGap: 1,
+    });
+    root.append(section("ماه به ماه", "از فایل‌های ماهانه‌ی گمرک (سال‌هایی که به تفکیک ماه منتشر شده‌اند).", card("", null, chart)));
+  }
+
+  // ---- world market
+  if (world) {
+    const maxShare = Math.max(...world.importers.map((r) => r.share || 0));
+    const basis = world.code !== data.world_code ? ` داده‌ی اطلس برای این کد نیست؛ ارقام مربوط به سرفصل ${world.code} است.` : "";
+    root.append(section(`بازار جهانی – ${yfa(world.year)}`, `بزرگ‌ترین واردکنندگان این کالا و جای ایران در هرکدام. قیمت هر کیلو از Comtrade (${world.price_year ? yfa(world.price_year) : "—"}).${basis}`,
+      card("واردکنندگان اصلی", "«فروش ایران» از داده‌ی اطلس است و در سال‌های اخیر کمتر از واقع است.", table([
+        { label: "کشور", render: (r) => countryLink(r.country) },
+        { label: "واردات", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+        { label: "سهم از بازار جهانی", num: true, value: (r) => r.share, render: (r) => meter(r.share, maxShare) },
+        { label: `رشد سالانه (${yfa(world.growth_years || 0)} ساله)`, num: true, value: (r) => r.cagr5, render: (r) => signed(r.cagr5) },
+        { label: "فروش ایران", num: true, value: (r) => r.iran_value, render: (r) => usd(r.iran_value) },
+        { label: "سهم ایران", num: true, value: (r) => r.iran_share, render: (r) => pct(r.iran_share) },
+        { label: "قیمت هر کیلو", num: true, value: (r) => r.unit_price, render: (r) => price(r.unit_price) },
+      ], world.importers)),
+      h("div", { style: "height:16px" }),
+      card("صادرکنندگان اصلی (رقبا)", "ایران با رنگ تأکید، بقیه خاکستری.", barList(
+        world.exporters.map((e) => ({ label: country(e.country), value: e.value, href: countryHref(e.country), color: e.country.iso3 === "IRN" ? "var(--export)" : "var(--axis)" })),
+        { format: usdShort, tip: (d) => [{ label: "ارزش", value: usd(d.value) }] }))));
+  }
+
+  // ---- metrics
+  const m = data.metrics;
+  if (m && (m.rca != null || m.world_trade != null)) {
+    root.append(section("شاخص‌های رقابت‌پذیری", `سرفصل ${m.heading}، اطلس هاروارد ${m.year ? yfa(m.year) : ""}`,
+      card("", null, h("dl", { class: "kv" },
+        h("dt", {}, "مزیت نسبی آشکار (RCA)"), h("dd", {}, num(m.rca), h("span", { class: "muted small" }, " — بالای ۱ یعنی سهم این کالا در صادرات ایران از سهمش در تجارت جهانی بیشتر است")),
+        h("dt", {}, "فاصله (Distance)"), h("dd", {}, num(m.distance, 3), h("span", { class: "muted small" }, " — هرچه کمتر، به توانمندی‌های فعلی ایران نزدیک‌تر")),
+        h("dt", {}, "ارزش راهبردی (COG)"), h("dd", {}, num(m.cog, 3), h("span", { class: "muted small" }, " — چقدر این کالا راه کالاهای پیچیده‌تر را باز می‌کند")),
+        h("dt", {}, "پیچیدگی کالا (PCI نرمال‌شده)"), h("dd", {}, num(m.pci)),
+        h("dt", {}, `تجارت جهانی (${m.stats_code || ""})`), h("dd", {}, usd(m.world_trade), " · رشد سالانه ۵ ساله ", signed(m.world_cagr5))))));
+  }
+
+  root.append(section("ادامه‌ی تحقیق", "این ابزارها API عمومی ندارند یا داده‌شان قابل بازنشر نیست؛ مستقیم بازشان کنید.",
+    card("", null, h("ul", {}, data.links.map((l) => h("li", {}, h("a", { href: l.url, target: "_blank", rel: "noopener" }, l.name), h("span", { class: "muted" }, ` — ${l.note}`)))))));
+  return root;
+}
+
+async function viewSources() {
+  const data = await api("/api/status");
+  const root = h("div", {}, h("h1", {}, "منابع داده"),
+    h("p", { class: "sub" }, "همه‌ی منابع در یک پایگاه داده‌ی مشترک ذخیره می‌شوند تا بتوان آن‌ها را کنار هم مقایسه کرد."));
+  const about = {
+    irica: "آمار رسمی سالانه و تجمعی سال جاری از irica.gov.ir: کد تعرفه‌ی ۸ رقمی، کشور، گمرک، وزن و ارزش دلاری. دقیق‌ترین و به‌روزترین منبع برای خود ایران.",
+    atlas: "داده‌ی تجارت جهانی که از دو طرف هر معامله تطبیق داده شده، به‌علاوه‌ی شاخص‌های فضای محصول (RCA، فاصله، COG). برای بازار جهانی عالی؛ برای ایران در سال‌های اخیر کم‌شمار.",
+    comtrade: "به‌صورت درخواستی برای هر کالا: واردات همه‌ی کشورها با وزن (برای قیمت هر کیلو) و آنچه شرکای تجاری از تجارت با ایران گزارش کرده‌اند.",
+    tpo: "صادرات به تفکیک استان، ماه و کد تعرفه‌ی ۸ رقمی از tpo.ir. تنها منبع عمومی برای اینکه کالای صادراتی از کجای ایران آمده است (۱۴۰۰ تا ۸ ماهه‌ی ۱۴۰۲).",
+  };
+  root.append(h("div", { class: "grid cols-4", style: "grid-template-columns:repeat(auto-fit,minmax(260px,1fr))" },
+    data.sources.map((s) => h("div", { class: "card" },
+      h("h3", {}, s.name),
+      h("p", { class: "card-sub" }, about[s.id]),
+      h("dl", { class: "kv" },
+        h("dt", {}, "ردیف‌ها"), h("dd", { class: "num" }, nf0.format(s.rows)),
+        h("dt", {}, "سال‌ها"), h("dd", {}, s.year_min ? `${yfa(s.year_min)} تا ${yfa(s.year_max)}` : "—"),
+        s.cached_products ? [h("dt", {}, "کالا/کشورهای ذخیره‌شده"), h("dd", {}, nf0.format(s.cached_products))] : null,
+        s.id === "irica" ? [h("dt", {}, "ردیف‌های ریز (گمرک × ماه)"), h("dd", { class: "num" }, nf0.format(data.customs_detail_rows || 0))] : null,
+        h("dt", {}, "آخرین بارگذاری"), h("dd", { class: "small" }, s.loaded_at ? new Date(s.loaded_at).toLocaleString("fa-IR") : "—"))))));
+
+  const logBox = h("div", { class: "log", style: "display:none" });
+  const buttons = [["all", "همگام‌سازی همه"], ["irica", "فقط گمرک"], ["tpo", "فقط استان‌ها"], ["atlas", "فقط اطلس"]].map(([id, label]) =>
+    h("button", { class: id === "all" ? "primary" : "", onclick: () => startSync(id) }, label));
+  async function startSync(id) {
+    buttons.forEach((b) => (b.disabled = true));
+    await api(`/api/sync/${id}`, { method: "POST" });
+    poll();
+  }
+  async function poll() {
+    const st = await api("/api/status");
+    const job = st.jobs[0];
+    if (!job) return;
+    logBox.style.display = "block";
+    logBox.textContent = job.log.join("\n") || "شروع شد…";
+    if (job.status === "running") setTimeout(poll, 1500);
+    else {
+      buttons.forEach((b) => (b.disabled = false));
+      logBox.textContent += `\n— ${job.status === "done" ? "تمام شد" : "ناموفق"}`;
+    }
+  }
+  if (data.jobs?.[0]?.status === "running") { buttons.forEach((b) => (b.disabled = true)); poll(); }
+  if (STATIC) {
+    root.append(section("این نسخه", null, card("", null, h("p", { class: "note small" },
+      `این نسخه‌ی آنلاین یک برداشت ثابت از داده‌هاست (ساخته‌شده در ${data.generated_at ? new Date(data.generated_at).toLocaleDateString("fa-IR") : "—"}). `,
+      "داده‌ی بازار جهانی فقط برای کالاهای اصلی همراهش است و ترکیب گمرک یا ماه با کشور در آمارنامه فقط در نسخه‌ی کامل روی سرور ممکن است."))));
+  } else
+  root.append(section("به‌روزرسانی", "دریافت دوباره‌ی اطلس و فایل‌های شناخته‌شده‌ی گمرک. فایل‌های تازه‌ی گمرک (مثلاً آمار ماهانه) را با خط فرمان اضافه کنید.",
+    card("", null, h("div", { class: "filters" }, buttons), logBox,
+      h("p", { class: "note small", style: "margin-top:12px" },
+        "افزودن فایل اکسل جدید گمرک: ", h("code", {}, "python3 -m rahkar import-irica path/to/file.xlsx"),
+        h("br"), "کلید رایگان Comtrade (برای حذف سقف ۵۰۰ ردیف): متغیر محیطی ", h("code", {}, "COMTRADE_KEY"),
+        data.comtrade_key ? " — تنظیم شده" : " — تنظیم نشده"))));
+
+  const ds = data.datasets.filter((d) => !d.scope.startsWith("product:"));
+  root.append(section("داده‌های بارگذاری‌شده", null, card("", null, table([
+    { label: "منبع", render: (r) => r.source },
+    { label: "مجموعه", render: (r) => r.label || r.scope },
+    { label: "ردیف", num: true, value: (r) => r.rows, render: (r) => nf0.format(r.rows || 0) },
+    { label: "جمع ردیف‌ها", num: true, value: (r) => r.total_usd, render: (r) => usd(r.total_usd) },
+    { label: "جمع اعلامی فایل", num: true, value: (r) => r.declared_usd, render: (r) => r.declared_usd && r.total_usd && r.declared_usd > r.total_usd * 1.02 ? h("b", {}, usd(r.declared_usd), " ⚠") : usd(r.declared_usd) },
+    { label: "بارگذاری", render: (r) => new Date(r.loaded_at).toLocaleString("fa-IR") },
+    { label: "مبدأ", render: (r) => (r.origin?.startsWith("http") ? h("a", { href: r.origin, target: "_blank", rel: "noopener" }, "پیوند") : r.origin || "—") },
+  ], ds))));
+  if (data.unmatched.length) {
+    root.append(h("div", { class: "banner" }, "نام‌هایی که به کشوری نگاشت نشدند (در rahkar/fa.py اضافه کنید): ", data.unmatched.join("، ")));
+  }
+  root.append(section("نکته‌های مهم درباره‌ی داده", null, card("", null, h("ul", {},
+    h("li", {}, "آمار صادرات گمرک «غیرنفتی» است؛ اطلس همه‌ی کالاها از جمله نفت را می‌شمارد."),
+    h("li", {}, "ایران سال‌هاست آمار کامل به سازمان ملل گزارش نمی‌دهد؛ اطلس و Comtrade تجارت ایران را از گزارش شرکا می‌بینند و بخشی از آن (تجارت از مسیر امارات و واسطه‌ها، یا ثبت با مبدأ دیگر) را از دست می‌دهند."),
+    h("li", {}, "کد تعرفه‌ی ایران ۸ رقمی و بر پایه‌ی HS است؛ مقایسه با داده‌ی جهانی روی ۶ رقم اول انجام می‌شود و برای چند ردیفی که بین نسخه‌های HS تغییر کرده‌اند ممکن است دقیق نباشد."),
+    h("li", {}, "سال شمسی به سال میلادی شروعش نگاشت می‌شود (۱۴۰۳ ← ۲۰۲۴)."),
+    h("li", {}, "شرایط استفاده: داده‌ی اطلس با ذکر منبع (The Growth Lab at Harvard University) قابل استفاده است؛ پیش از استفاده‌ی تجاری، شرایط هر منبع را بخوانید.")))));
+  return root;
+}
+
+// ------------------------------------------------------------------ statistics book (pivot)
+const ROW_DIMS = [
+  ["partner", "کشور"], ["hs8", "کالا (۸ رقمی)"], ["hs6", "کالا (۶ رقمی)"], ["hs4", "کالا (۴ رقمی)"], ["hs2", "فصل تعرفه"],
+  ["office", "گمرک"], ["province", "استان (فقط صادرات ۱۴۰۰–۱۴۰۲)"], ["year", "سال"], ["month", "ماه"],
+];
+let exploreOptions = null;
+
+async function viewExplore(params) {
+  exploreOptions = exploreOptions || await api("/api/explore/options");
+  const opt = exploreOptions;
+  const state = {
+    flow: params.get("flow") || "X", rows: params.get("rows") || "partner", cols: params.get("cols") || "",
+    from: params.get("from") || "", to: params.get("to") || "", hs: params.get("hs") || "",
+    partner: params.get("partner") || "", office: params.get("office") || "", province: params.get("province") || "",
+  };
+  const go = (patch) => {
+    const next = { ...state, ...patch };
+    const qs = new URLSearchParams(Object.entries(next).filter(([, v]) => v));
+    go(`/explore?${qs}`);
+  };
+  const q = new URLSearchParams(Object.entries({ ...state, limit: 500 }).filter(([, v]) => v));
+  let data, error;
+  try { data = await api(`/api/explore?${q}`); } catch (e) { error = e.message; }
+
+  const root = h("div", {}, h("h1", {}, "آمارنامه‌ی تجارت خارجی"),
+    h("p", { class: "sub" }, "هر ردیف آماری که گمرک و سازمان توسعه تجارت منتشر کرده‌اند، با هر برشی که بخواهید: کالا، کشور، گمرک، استان، سال و ماه."));
+
+  const years = data?.available || [];
+  const yearSel = (key, value) => h("select", { onchange: (e) => go({ [key]: e.target.value }) },
+    years.map((y) => h("option", { value: y, selected: Number(value) === y }, yfa(y))));
+  const select = (key, value, items, allLabel) => h("select", { onchange: (e) => go({ [key]: e.target.value }) },
+    h("option", { value: "" }, allLabel), items.map(([v, l]) => h("option", { value: v, selected: v === value }, l)));
+  const hsInput = h("input", { type: "search", value: state.hs, placeholder: "مثلاً 0802 یا 690721", size: 14, class: "code",
+    onchange: (e) => go({ hs: e.target.value.replace(/\D/g, "") }) });
+
+  root.append(h("div", { class: "filters" },
+    h("div", { class: "seg" },
+      h("button", { class: state.flow === "X" ? "on" : "", onclick: () => go({ flow: "X" }) }, "صادرات"),
+      h("button", { class: state.flow === "M" ? "on" : "", onclick: () => go({ flow: "M" }) }, "واردات")),
+    h("label", {}, "ردیف‌ها", select("rows", state.rows, ROW_DIMS, "—")),
+    h("label", {}, "ستون‌ها", select("cols", state.cols, [["year", "سال"], ["month", "ماه"]], "بدون تفکیک")),
+    years.length ? h("label", {}, "از", yearSel("from", data.year_from), "تا", yearSel("to", data.year_to)) : null),
+    h("div", { class: "filters" },
+      h("label", {}, "کد کالا", hsInput),
+      h("label", {}, "کشور", select("partner", state.partner, opt.partners.map((c) => [c.iso3, country(c)]), "همه")),
+      h("label", {}, "گمرک", select("office", state.office, opt.offices.map((o) => [o, o]), "همه")),
+      h("label", {}, "استان", select("province", state.province, opt.provinces.map((o) => [o, o]), "همه")),
+      h("button", { onclick: () => go({ hs: "", partner: "", office: "", province: "" }) }, "پاک کردن فیلترها")));
+
+  if (error) {
+
+    root.append(h("div", { class: "banner" }, error));
+
+    return root;
+
+  }
+  if (!data.rows.length) {
+    root.append(empty("برای این برش داده‌ای نیست."));
+    return root;
+  }
+
+  const dimLabel = Object.fromEntries(ROW_DIMS)[state.rows];
+  const labelOf = (r) => {
+    if (r.country) return countryLink(r.country);
+    if (state.rows.startsWith("hs")) return h("span", {}, codeEl(r.key), " ", r.label || h("span", { class: "en" }, r.label_en || ""));
+    if (state.rows === "province") return h("a", { href: provinceHref(r.key) }, r.label);
+    return r.label;
+  };
+  const plainLabel = (r) => (r.country ? country(r.country) : r.label || r.label_en || "");
+  const cols = [
+    { label: dimLabel, wide: state.rows.startsWith("hs"), render: labelOf },
+    ...data.columns.map((c) => ({ label: /^\d+$/.test(c.label) ? yfa(Number(c.label)) : c.label, num: true, value: (r) => r.values[c.key], render: (r) => usd(r.values[c.key]) })),
+    { label: "جمع", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+    { label: "سهم", num: true, value: (r) => r.share, render: (r) => meter(r.share) },
+    { label: "وزن", num: true, value: (r) => r.kg, render: (r) => tons(r.kg) },
+    { label: "قیمت هر کیلو", num: true, value: (r) => r.unit_price, render: (r) => price(r.unit_price) },
+  ];
+  const period = data.year_from === data.year_to ? yfa(data.year_from) : `${yfa(data.year_from)} تا ${yfa(data.year_to)}`;
+  const source = data.table === "province_trade" ? "سازمان توسعه تجارت" : "گمرک جمهوری اسلامی ایران";
+  const header = ["کد", dimLabel, ...data.columns.map((c) => c.label), "جمع (دلار)", "وزن (کیلوگرم)", "سهم"];
+  const body = data.rows.map((r) => [r.key, plainLabel(r), ...data.columns.map((c) => Math.round(r.values[c.key] || 0)),
+    Math.round(r.value), Math.round(r.kg), r.share?.toFixed(4)]);
+  const csv = async (e) => {
+    if (!STATIC) return downloadCsv(`rahkar-${state.flow}-${state.rows}-${data.year_from}-${data.year_to}.csv`, header, body);
+    try {
+      await copyTable(header, body);
+      e.target.textContent = "کپی شد؛ در اکسل Paste کنید";
+    } catch {
+      e.target.textContent = "مرورگر اجازه‌ی کپی نداد";
+    }
+  };
+  root.append(h("div", { class: "grid cols-4" },
+    tile(`${state.flow === "X" ? "صادرات" : "واردات"} ${period}`, usd(data.total.value), h("span", { class: "muted" }, `منبع: ${source}`), state.flow === "X" ? "var(--export)" : "var(--import)"),
+    tile("وزن", tons(data.total.kg), h("span", { class: "muted" }, `قیمت میانگین: ${price(data.total.value / data.total.kg)}`)),
+    tile("تعداد ردیف", nf0.format(data.row_count), h("span", { class: "muted" }, data.row_count > data.rows.length ? `${nf0.format(data.rows.length)} ردیف اول نمایش داده شده` : "همه نمایش داده شده")),
+    h("div", { class: "card tile" }, h("div", { class: "label" }, "خروجی"), h("div", { style: "margin-top:8px" },
+      h("button", { class: "primary", onclick: csv }, STATIC ? "کپی جدول برای اکسل" : "دانلود اکسل (CSV)")))));
+  if (data.rows.length > 1 && !["year", "month"].includes(state.rows)) {
+    root.append(h("div", { style: "height:16px" }), card(`۱۵ ${dimLabel} اول`, null, barList(data.rows.slice(0, 15).map((r) => ({
+      label: `${state.rows.startsWith("hs") ? r.key + " · " : ""}${plainLabel(r)}`, value: r.value,
+      href: r.country ? countryHref(r.country) : state.rows.startsWith("hs") ? productHref(r.key) : null,
+    })), { color: state.flow === "X" ? "var(--export)" : "var(--import)", format: usdShort, tip: (d) => [{ label: "سهم", value: pct(d.value / data.total.value) }] })));
+  }
+  root.append(h("div", { style: "height:16px" }), card("", null, table(cols, data.rows)));
+  return root;
+}
+
+// ------------------------------------------------------------------ countries
+async function viewCountries(params) {
+  const data = await api(`/api/countries${params.get("year") ? `?year=${params.get("year")}` : ""}`);
+  const root = h("div", {}, h("h1", {}, "کشورهای طرف تجارت"),
+    h("p", { class: "sub" }, "همه‌ی کشورهایی که ایران با آن‌ها داد و ستد کرده، از آمار گمرک. روی هر کشور بزنید تا جزئیات آن را ببینید."));
+  if (!data.year_fa) {
+    root.append(empty("آمار گمرک بارگذاری نشده است.", ["منابع داده", "#/sources"]));
+    return root;
+  }
+  root.append(h("div", { class: "filters" }, h("label", {}, "سال", h("select", { onchange: (e) => { go(`/countries?year=${e.target.value}`); } },
+    data.periods.map((p) => h("option", { value: p.year_fa, selected: p.year_fa === data.year_fa }, periodLabel(p.year_fa, Math.min(p.months.X || 12, p.months.M || 12))))))));
+  const filter = h("input", { type: "search", placeholder: "فیلتر نام کشور", oninput: (e) => {
+    const t = e.target.value.trim();
+    wrap.querySelectorAll("tbody tr").forEach((tr) => { tr.style.display = !t || tr.firstChild.textContent.includes(t) ? "" : "none"; });
+  } });
+  const wrap = table([
+    { label: "کشور", render: (r) => countryLink(r.country) },
+    { label: "صادرات ایران", num: true, value: (r) => r.X, render: (r) => usd(r.X) },
+    { label: "سهم", num: true, value: (r) => r.X_share, render: (r) => meter(r.X_share, data.rows[0]?.X_share) },
+    { label: "رشد", num: true, value: (r) => r.X_growth, render: (r) => signed(r.X_growth) },
+    { label: "واردات ایران", num: true, value: (r) => r.M, render: (r) => usd(r.M) },
+    { label: "سهم", num: true, value: (r) => r.M_share, render: (r) => pct(r.M_share) },
+    { label: "رشد", num: true, value: (r) => r.M_growth, render: (r) => signed(r.M_growth) },
+    { label: "تراز", num: true, value: (r) => r.balance, render: (r) => usd(r.balance) },
+  ], data.rows);
+  root.append(h("div", { class: "filters" }, filter, h("span", { class: "muted small" }, `${nf0.format(data.rows.length)} کشور`)), card("", null, wrap));
+  return root;
+}
+
+async function viewCountry(params, iso3) {
+  const slow = setTimeout(() => {
+    main.replaceChildren(h("div", { class: "card empty" }, h("span", { class: "spinner" }), " در حال دریافت واردات این کشور از اطلس… بار اول تا چند ثانیه طول می‌کشد."));
+    main.classList.remove("loading");
+  }, 600);
+  let data;
+  try { data = await api(`/api/country/${iso3}${params.get("year") ? `?year=${params.get("year")}` : ""}`); } finally { clearTimeout(slow); }
+  const c = data.country;
+  const root = h("div", {}, h("div", { class: "chips" }, h("a", { class: "chip", href: "#/countries" }, "همه‌ی کشورها")),
+    h("h1", {}, country(c)), h("p", { class: "sub" }, c.name_en ? h("span", { class: "ltr" }, c.name_en) : null, ` · تجارت ایران با این کشور از آمار گمرک`));
+  for (const w of data.warnings) root.append(h("div", { class: "banner" }, w));
+  if (data.periods.length && !STATIC) {
+    root.append(h("div", { class: "filters" }, h("label", {}, "سال", h("select", { onchange: (e) => { go(`/country/${iso3}?year=${e.target.value}`); } },
+      data.periods.map((p) => h("option", { value: p.year_fa, selected: p.year_fa === data.year_fa }, periodLabel(p.year_fa, Math.min(p.months.X || 12, p.months.M || 12))))))));
+  }
+  const X = data.flows.X, M = data.flows.M;
+  root.append(h("div", { class: "grid cols-4" },
+    tile(`صادرات ایران به ${country(c)}`, usd(X?.value), X ? h("span", {}, growthEl(X.growth, "—")) : null, "var(--export)"),
+    tile(`واردات ایران از ${country(c)}`, usd(M?.value), M ? h("span", {}, growthEl(M.growth, "—")) : null, "var(--import)"),
+    tile("رتبه بین شرکای ایران", X?.rank ? `صادرات: ${yfa(X.rank)}` : "—", M?.rank ? h("span", {}, `واردات: ${yfa(M.rank)}`) : null),
+    tile("سهم از کل تجارت ایران", X ? pct(X.share) : "—", h("span", { class: "muted" }, `سهم واردات: ${pct(M?.share)}`))));
+
+  if (data.series.length > 1) {
+    root.append(section("روند سالانه", "آمار گمرک؛ سال‌هایی که منتشر نشده‌اند خالی می‌مانند.", card("", null, lineChart([
+      { name: "صادرات", color: "var(--export)", points: data.series.map((r) => ({ x: r.year_fa, y: r.X })) },
+      { name: "واردات", color: "var(--import)", points: data.series.map((r) => ({ x: r.year_fa, y: r.M })) },
+    ], { format: usdShort, tickFormat: (v) => (v ? usdShort(v) : "۰"), xFormat: yfa, maxGap: 1 }))));
+  }
+
+  const productTable = (f) => table([
+    { label: "کد", render: (r) => codeEl(r.code) },
+    { label: "کالا", wide: true, render: (r) => r.name_fa || "—" },
+    { label: "ارزش", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+    { label: "سهم", num: true, value: (r) => r.share, render: (r) => meter(r.share, f.products[0]?.share) },
+    { label: "قیمت هر کیلو", num: true, value: (r) => r.unit_price, render: (r) => price(r.unit_price) },
+    { label: "سال قبل", num: true, value: (r) => r.prev, render: (r) => usd(r.prev) },
+  ], f.products);
+  const link = (flow) => h("a", { href: `#/explore?flow=${flow}&rows=hs8&cols=year&partner=${iso3}` }, "همه‌ی کالاها در آمارنامه ←");
+  if (X) root.append(section(`کالاهایی که ایران به ${country(c)} صادر کرده`, `${periodLabel(data.year_fa, X.months)} · ۴۰ ردیف اول`, card("", null, productTable(X), h("p", { class: "small" }, link("X")))));
+  if (M) root.append(section(`کالاهایی که ایران از ${country(c)} وارد کرده`, `${periodLabel(data.year_fa, M.months)} · ۴۰ ردیف اول`, card("", null, productTable(M), h("p", { class: "small" }, link("M")))));
+  const chapterBars = (f, color) => barList(f.chapters.map((ch) => ({ label: `${ch.code} · ${ch.name_fa || ""}`, value: ch.value })), { color, format: usdShort });
+  const officeBars = (f, color) => barList(f.offices.map((o) => ({ label: o.name, value: o.value })), { color, format: usdShort });
+  root.append(section("فصل‌های تعرفه و گمرکات", null,
+    h("div", { class: "grid cols-2" }, X ? card("صادرات به تفکیک فصل", null, chapterBars(X, "var(--export)")) : null, M ? card("واردات به تفکیک فصل", null, chapterBars(M, "var(--import)")) : null),
+    h("div", { style: "height:16px" }),
+    h("div", { class: "grid cols-2" }, X?.offices.length ? card("گمرکات صادرات", null, officeBars(X, "var(--export)")) : null, M?.offices.length ? card("گمرکات واردات", null, officeBars(M, "var(--import)")) : null)));
+
+  const g = data.gaps;
+  if (g?.rows.length) {
+    root.append(section(`فرصت‌ها در بازار ${country(c)}`,
+      `کالاهایی که ${country(c)} زیاد از دنیا می‌خرد (اطلس ${yfa(g.year)})، ایران در آن‌ها مزیت نسبی دارد (RCA ≥ ۱)، ولی کمتر از ۱۰٪ این بازار را دارد (گمرک ${g.irica_year_fa ? yfa(g.irica_year_fa) : ""}). نفت، مواد خام و سلاح حذف شده‌اند.`,
+      card("", null, table([
+        { label: "کد", render: (r) => codeEl(r.code) },
+        { label: "کالا", wide: true, render: (r) => h("span", {}, h("span", { class: "name" }, r.chapter.name_fa || ""), h("span", { class: "en" }, r.name_en || "")) },
+        { label: `واردات ${country(c)}`, num: true, value: (r) => r.imports, render: (r) => usd(r.imports) },
+        { label: "فروش ایران", num: true, value: (r) => r.iran, render: (r) => usd(r.iran) },
+        { label: "سهم ایران", num: true, value: (r) => r.iran_share, render: (r) => pct(r.iran_share) },
+        { label: "RCA گمرک", num: true, value: (r) => r.rca_irica, render: (r) => num(r.rca_irica) },
+        { label: "RCA اطلس", num: true, value: (r) => r.rca, render: (r) => num(r.rca) },
+      ], g.rows))));
+  }
+  return root;
+}
+
+// ------------------------------------------------------------------ provinces
+async function viewProvinces(params) {
+  const data = await api(`/api/provinces${params.get("year") ? `?year=${params.get("year")}` : ""}`);
+  const root = h("div", {}, h("h1", {}, "صادرات استان‌ها"),
+    h("p", { class: "sub" }, "سازمان توسعه تجارت، به تفکیک استان و کد تعرفه. استان محل اظهار صادرات است؛ برای کالاهایی که در گمرک داخلی همان استان اظهار شوند تقریب خوبی از محل تولید است، ولی گاز، نفت و کالاهای عبوری از گمرکات مرزی به استان مرزی نسبت داده می‌شوند."));
+  if (!data.year_fa) {
+    root.append(empty("آمار استانی بارگذاری نشده است.", ["منابع داده", "#/sources"]));
+    return root;
+  }
+  root.append(h("div", { class: "filters" }, h("label", {}, "سال", h("select", { onchange: (e) => { go(`/provinces?year=${e.target.value}`); } },
+    data.years.map((y) => h("option", { value: y.year_fa, selected: y.year_fa === data.year_fa }, periodLabel(y.year_fa, y.months)))))),
+    h("p", { class: "note small" }, "این آمار فقط برای ۱۴۰۰، ۱۴۰۱ و ۸ ماهه‌ی ۱۴۰۲ منتشر شده است."));
+  root.append(h("div", { class: "grid cols-2" },
+    card(`سهم استان‌ها از صادرات ${periodLabel(data.year_fa, data.months)}`, null, barList(data.rows.map((r) => ({ label: r.province, value: r.value, href: provinceHref(r.province) })),
+      { format: usdShort, tip: (d) => [{ label: "سهم", value: pct(d.value / data.total) }] })),
+    card("سه کالای اصلی هر استان", null, table([
+      { label: "استان", render: (r) => h("a", { href: provinceHref(r.province) }, r.province) },
+      { label: "رشد", num: true, value: (r) => r.growth, render: (r) => signed(r.growth) },
+      { label: "کالاهای اصلی", render: (r) => h("span", { class: "small" }, r.top.map((t, i) => [i ? "، " : "", h("a", { href: productHref(t.code) }, (t.name_fa || t.code).slice(0, 34))])) },
+    ], data.rows))));
+  return root;
+}
+
+async function viewProvince(params, name) {
+  name = decodeURIComponent(name);
+  const data = await api(`/api/province/${encodeURIComponent(name)}${params.get("year") ? `?year=${params.get("year")}` : ""}`);
+  const root = h("div", {}, h("div", { class: "chips" }, h("a", { class: "chip", href: "#/provinces" }, "همه‌ی استان‌ها")),
+    h("h1", {}, `صادرات استان ${data.province}`), h("p", { class: "sub" }, "سازمان توسعه تجارت · استان محل اظهار صادرات"));
+  root.append(h("div", { class: "filters" }, h("label", {}, "سال", h("select", { onchange: (e) => { go(`${provinceHref(name)}?year=${e.target.value}`); } },
+    data.years.map((y) => h("option", { value: y.year_fa, selected: y.year_fa === data.year_fa }, periodLabel(y.year_fa, y.months)))))));
+  root.append(h("div", { class: "grid cols-4" },
+    tile(`صادرات ${periodLabel(data.year_fa, data.months)}`, usd(data.value), null, "var(--export)"),
+    tile("رتبه بین ۳۱ استان", data.rank ? yfa(data.rank) : "—", null),
+    tile("سهم از صادرات کشور", pct(data.share), null),
+    tile("تعداد سال‌ها", yfa(data.series.length), h("span", { class: "muted" }, data.series.map((s) => usd(s.value)).join(" · ")))));
+  if (data.monthly.length > 1) {
+    root.append(section("ماه به ماه", periodLabel(data.year_fa, data.months), card("", null, barList(
+      data.monthly.map((m) => ({ label: MONTHS[m.month], value: m.value })), { format: usdShort }))));
+  }
+  root.append(section("کالاهای صادراتی استان", "«سهم از کشور» یعنی چند درصد از صادرات کل کشور در آن کالا از این استان بوده است.", card("", null, table([
+    { label: "کد", render: (r) => codeEl(r.code) },
+    { label: "کالا", wide: true, render: (r) => r.name_fa || "—" },
+    { label: "ارزش", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+    { label: "سهم در استان", num: true, value: (r) => r.share, render: (r) => meter(r.share, data.products[0]?.share) },
+    { label: "سهم از کشور", num: true, value: (r) => r.national_share, render: (r) => pct(r.national_share) },
+    { label: "قیمت هر کیلو", num: true, value: (r) => r.unit_price, render: (r) => price(r.unit_price) },
+  ], data.products), h("p", { class: "small" }, h("a", { href: `#/explore?rows=hs8&cols=year&province=${encodeURIComponent(data.province)}` }, "همه‌ی کالاها در آمارنامه ←")))));
+  root.append(section("به تفکیک فصل", null, card("", null, barList(data.chapters.map((c) => ({ label: `${c.code} · ${c.name_fa || ""}`, value: c.value })), { format: usdShort }))));
+  return root;
+}
+
+// ------------------------------------------------------------------ prices
+const toman = (rial) => (rial == null || !isFinite(rial) ? "—" : `${nf0.format(rial / 10)} تومان`);
+const perKg = (v) => (v == null || !isFinite(v) ? "—" : `${nf(v < 1 ? 3 : 2).format(v)} $`);
+const priceHref = (source, series) => `#/price/${source}/${encodeURIComponent(series)}`;
+const SOURCE_NAMES = { wb: "بانک جهانی", ime: "بورس کالای ایران", cbi: "بانک مرکزی" };
+const MONTHS_EN = (p) => { const [y, m] = p.split("-"); return `${yfa(Number(m))}/${yfa(Number(y))}`; };
+function diffEl(v) {
+  if (v == null || !isFinite(v)) return "—";
+  return h("span", { class: v >= 0 ? "diff-up" : "diff-down" }, signed(v));
+}
+
+async function viewPrices() {
+  const data = await api("/api/prices");
+  const root = h("div", {}, h("h1", {}, "قیمت‌ها"),
+    h("p", { class: "sub" }, "قیمت جهانی کالاهای پایه، بورس کالای ایران، نرخ رسمی ارز و قیمت هر کیلو در صادرات و واردات ایران، کنار هم."));
+  const fx = Object.fromEntries((data.fx.rows || []).map((r) => [r.code, r]));
+  const fxTile = (code) => (fx[code]
+    ? tile(`${fx[code].name_fa} (نرخ رسمی)`, toman(fx[code].rial), h("span", { class: "muted" }, `${nf0.format(fx[code].rial)} ریال · ${data.fx_date || ""}`))
+    : null);
+  root.append(h("div", { class: "grid cols-4" }, fxTile("USD"), fxTile("EUR"), fxTile("AED"), fxTile("CNY")));
+
+  // ---- Iran's export price against the world price
+  const compared = data.world.rows.filter((r) => r.iran_export && r.export_vs_world != null)
+    .sort((a, b) => b.iran_export.value - a.iran_export.value);
+  if (compared.length) {
+    root.append(section("ایران ارزان‌تر می‌فروشد یا گران‌تر؟",
+      `قیمت هر کیلو در صادرات ایران (گمرک ${yfa(data.customs.year_x)}) در برابر آخرین قیمت جهانی بانک جهانی. منفی یعنی ایران زیر قیمت جهانی فروخته است؛ تفاوت کیفیت، شرایط تحویل و تخفیف تحریمی هم در آن هست.`,
+      card("", null, table([
+        { label: "کالا", wide: true, render: (r) => h("span", {}, h("a", { href: priceHref("wb", r.series) }, r.name_fa), " ", h("a", { class: "code small", href: productHref(r.hs) }, r.hs)) },
+        { label: "قیمت جهانی (هر کیلو)", num: true, value: (r) => r.usd_kg, render: (r) => perKg(r.usd_kg) },
+        { label: "قیمت صادراتی ایران", num: true, value: (r) => r.iran_export.usd_kg, render: (r) => perKg(r.iran_export.usd_kg) },
+        { label: "اختلاف", num: true, value: (r) => r.export_vs_world, render: (r) => diffEl(r.export_vs_world) },
+        { label: "ارزش صادرات ایران", num: true, value: (r) => r.iran_export.value, render: (r) => usd(r.iran_export.value) },
+        { label: "۳ سال اخیر", render: (r) => sparkline(r.spark) },
+      ], compared))));
+  }
+
+  // ---- Iran Mercantile Exchange
+  if (data.ime.rows.length) {
+    root.append(section(`بورس کالای ایران – ${data.ime.period_fa}`,
+      `میانگین قیمت معاملات بازار فیزیکی هر گروه کالا (ارزش ÷ حجم) از گزارش ماهانه‌ی بورس کالا. معادل دلاری با نرخ رسمی بانک مرکزی (${data.fx_date || "—"}).`,
+      card("", null, table([
+        { label: "گروه کالا", wide: true, render: (r) => h("a", { href: priceHref("ime", r.series) }, r.name_fa) },
+        { label: "قیمت هر کیلو", num: true, value: (r) => r.rial_kg, render: (r) => toman(r.rial_kg) },
+        { label: "معادل دلاری", num: true, value: (r) => r.usd_kg, render: (r) => perKg(r.usd_kg) },
+        { label: "تغییر ماهانه", num: true, value: (r) => r.mom, render: (r) => diffEl(r.mom) },
+        { label: "تغییر سالانه", num: true, value: (r) => r.yoy, render: (r) => diffEl(r.yoy) },
+        { label: "حجم (تن)", num: true, value: (r) => r.volume, render: (r) => nf0.format(r.volume || 0) },
+        { label: "قیمت صادراتی", num: true, value: (r) => r.iran_export?.usd_kg, render: (r) => perKg(r.iran_export?.usd_kg) },
+        { label: "قیمت جهانی", num: true, value: (r) => r.world?.usd_kg, render: (r) => perKg(r.world?.usd_kg) },
+        { label: "روند", render: (r) => sparkline(r.spark, { color: "var(--import)" }) },
+      ], data.ime.rows))));
+  }
+
+  // ---- world prices
+  root.append(section(`قیمت جهانی کالاهای پایه – ${data.world.period ? MONTHS_EN(data.world.period) : ""}`,
+    "قیمت ماهانه‌ی بانک جهانی (Pink Sheet). روی هر کالا بزنید تا روند کامل و مقایسه با ایران را ببینید.",
+    card("", null, table([
+      { label: "کالا", wide: true, render: (r) => h("span", {}, h("a", { href: priceHref("wb", r.series) }, r.name_fa), h("span", { class: "en" }, r.name_en)) },
+      { label: "آخرین قیمت", num: true, value: (r) => r.value, render: (r) => h("span", {}, nf(2).format(r.value), " ", h("span", { class: "muted small ltr" }, r.unit)) },
+      { label: "ماه", num: true, render: (r) => MONTHS_EN(r.period) },
+      { label: "تغییر ماهانه", num: true, value: (r) => r.mom, render: (r) => diffEl(r.mom) },
+      { label: "تغییر سالانه", num: true, value: (r) => r.yoy, render: (r) => diffEl(r.yoy) },
+      { label: "۳ سال اخیر", render: (r) => sparkline(r.spark) },
+    ], data.world.rows))));
+
+  // ---- customs unit values
+  const unitTable = (rows) => table([
+    { label: "کد", render: (r) => codeEl(r.code) },
+    { label: "کالا", wide: true, render: (r) => r.name_fa || "—" },
+    { label: "ارزش", num: true, value: (r) => r.value, render: (r) => usd(r.value) },
+    { label: "قیمت هر کیلو", num: true, value: (r) => r.usd_kg, render: (r) => perKg(r.usd_kg) },
+    { label: "سال قبل", num: true, value: (r) => r.prev_usd_kg, render: (r) => perKg(r.prev_usd_kg) },
+    { label: "تغییر", num: true, value: (r) => r.change, render: (r) => diffEl(r.change) },
+  ], rows);
+  root.append(section("قیمت هر کیلو در تجارت ایران", "ارزش ÷ وزن اظهارشده در گمرک برای ۴۰ ردیف اصلی صادرات و واردات.",
+    h("div", { class: "grid" },
+      card(`صادرات ${yfa(data.customs.year_x)}`, null, unitTable(data.customs.X)),
+      card(`واردات ${yfa(data.customs.year_m)}`, null, unitTable(data.customs.M)))));
+
+  root.append(section(`نرخ رسمی ارز – ${data.fx_date || ""}`, "نرخ اعلامی بانک مرکزی جمهوری اسلامی ایران برای هر واحد ارز.",
+    card("", null, table([
+      { label: "ارز", render: (r) => h("span", {}, r.name_fa, " ", h("span", { class: "muted small ltr" }, r.code)) },
+      { label: "ریال", num: true, value: (r) => r.rial, render: (r) => nf2.format(r.rial) },
+      { label: "تومان", num: true, value: (r) => r.rial, render: (r) => toman(r.rial) },
+    ], data.fx.rows))));
+  return root;
+}
+
+async function viewPrice(params, source, series) {
+  series = decodeURIComponent(series);
+  const data = await api(`/api/price?source=${source}&series=${encodeURIComponent(series)}`);
+  const root = h("div", {}, h("div", { class: "chips" }, h("a", { class: "chip", href: "#/prices" }, "همه‌ی قیمت‌ها"),
+    h("span", { class: "chip" }, SOURCE_NAMES[source] || source)),
+    h("h1", {}, data.name_fa || series),
+    h("p", { class: "sub" }, data.name_en && data.name_en !== data.name_fa ? h("span", { class: "ltr" }, data.name_en) : null,
+      data.hs ? [" · مقایسه با کد تعرفه‌ی ", h("a", { class: "code", href: productHref(data.hs) }, data.hs)] : null));
+  const pts = data.points;
+  const last = pts[pts.length - 1];
+  const isIme = source === "ime";
+  const label = (p) => (isIme ? (() => { const [y, m] = p.split("-"); return `${MONTHS[Number(m)]} ${yfa(Number(y))}`; })() : MONTHS_EN(p));
+  root.append(h("div", { class: "grid cols-4" },
+    tile("آخرین قیمت", isIme ? toman(last.value) : `${nf(2).format(last.value)}`, h("span", { class: "muted" }, isIme ? "هر کیلو" : data.unit, " · ", label(last.period))),
+    tile("تغییر ماهانه", pts.length > 1 ? signed(last.value / pts[pts.length - 2].value - 1) : "—", null),
+    tile("تغییر سالانه", pts.length > 12 ? signed(last.value / pts[pts.length - 13].value - 1) : "—", null),
+    isIme ? tile("حجم معاملات ماه", `${nf0.format(last.volume || 0)} تن`, null) : tile("بیشترین / کمترین (۵ سال)", (() => {
+      const recent = pts.slice(-60).map((p) => p.value);
+      return `${nf(2).format(Math.max(...recent))} / ${nf(2).format(Math.min(...recent))}`;
+    })(), null)));
+
+  const xOf = (p) => { const [y, m] = p.split("-").map(Number); return y + (m - 1) / 12; };
+  const series1 = { name: isIme ? "بورس کالا (تومان/کیلو)" : `قیمت جهانی (${data.unit})`, color: "var(--export)",
+    points: pts.map((p) => ({ x: xOf(p.period), y: isIme ? p.value / 10 : p.value })) };
+  root.append(section("روند قیمت", null, card("", null, lineChart([series1], {
+    format: (v) => nf(2).format(v), tickFormat: (v) => nf0.format(v), xFormat: (x) => yfa(Math.floor(x)), height: 280,
+  }))));
+
+  // Iran's own unit values next to the benchmark, both in US$/kg.
+  const ex = data.iran_export || [], im = data.iran_import || [];
+  if ((ex.length || im.length) && (source === "wb" ? data.to_kg : true)) {
+    const benchmark = source === "wb" ? pts.map((p) => ({ x: xOf(p.period), y: p.value * data.to_kg })) : null;
+    // Customs years are Iranian (1403 ≈ Mar 2024–Mar 2025): plot each at the middle of its span.
+    const toGreg = (yf) => yf + 621 + 0.75;
+    const lines = [];
+    if (benchmark) lines.push({ name: "قیمت جهانی ($ هر کیلو)", color: "var(--axis)", points: benchmark.filter((p) => p.x >= 2015) });
+    if (ex.length) lines.push({ name: "صادرات ایران ($ هر کیلو)", color: "var(--export)", points: ex.map((r) => ({ x: source === "ime" ? r.year_fa + 0.5 : toGreg(r.year_fa), y: r.usd_kg })) });
+    if (im.length) lines.push({ name: "واردات ایران ($ هر کیلو)", color: "var(--import)", points: im.map((r) => ({ x: source === "ime" ? r.year_fa + 0.5 : toGreg(r.year_fa), y: r.usd_kg })) });
+    root.append(section("مقایسه با قیمت صادرات و واردات ایران", `قیمت هر کیلو در آمار گمرک برای کد ${data.hs} (سال‌های شمسی روی محور ${source === "ime" ? "شمسی" : "میلادی، در میانه‌ی هر سال"}).`,
+      card("", null, lineChart(lines, { format: (v) => perKg(v), tickFormat: (v) => nf(2).format(v), xFormat: (x) => yfa(Math.floor(x)), height: 260 }),
+        table([
+          { label: "سال", render: (r) => yfa(r.year_fa) + (r.months && r.months < 12 ? ` (${yfa(r.months)} ماهه)` : "") },
+          { label: "قیمت صادرات", num: true, render: (r) => perKg(r.x) },
+          { label: "قیمت واردات", num: true, render: (r) => perKg(r.m) },
+        ], [...new Set([...ex, ...im].map((r) => r.year_fa))].sort().map((y) => ({
+          year_fa: y, months: (ex.find((r) => r.year_fa === y) || im.find((r) => r.year_fa === y)).months,
+          x: ex.find((r) => r.year_fa === y)?.usd_kg, m: im.find((r) => r.year_fa === y)?.usd_kg,
+        }))))));
+  }
+  root.append(section("داده", null, card("", null, table([
+    { label: "دوره", render: (r) => label(r.period) },
+    { label: isIme ? "تومان/کیلو" : data.unit, num: true, render: (r) => (isIme ? nf0.format(r.value / 10) : nf(2).format(r.value)) },
+    ...(isIme ? [{ label: "حجم (تن)", num: true, render: (r) => nf0.format(r.volume || 0) }] : []),
+  ], [...pts].reverse().slice(0, 36)))));
+  return root;
+}
+
+// ------------------------------------------------------------------ search
+const q = document.getElementById("q");
+const results = document.getElementById("results");
+let searchTimer, selected = -1;
+function closeResults() { results.classList.remove("open"); selected = -1; }
+q.addEventListener("input", () => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(async () => {
+    const text = q.value.trim();
+    if (text.length < 2) return closeResults();
+    const list = await api(`/api/search?q=${encodeURIComponent(text)}`).catch(() => []);
+    results.replaceChildren(...list.map((r) => h("a", { href: productHref(r.code), role: "option", onclick: () => { closeResults(); q.value = ""; } },
+      h("span", { class: "code" }, r.code),
+      h("span", {}, r.name_fa || r.chapter?.name_fa || r.name_en || ""),
+      h("span", { class: "en" }, r.name_fa ? r.name_en || "" : ""))));
+    if (!list.length) results.replaceChildren(h("div", { class: "empty" }, "چیزی پیدا نشد"));
+    results.classList.add("open");
+    selected = -1;
+  }, 200);
+});
+q.addEventListener("keydown", (e) => {
+  const items = [...results.querySelectorAll("a")];
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    e.preventDefault();
+    selected = (selected + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+    items.forEach((a, i) => a.classList.toggle("sel", i === selected));
+  } else if (e.key === "Enter") {
+    const digits = q.value.replace(/[^\d۰-۹]/g, "").replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+    const target = items[selected] || (digits.length >= 2 && [2, 4, 6, 8].includes(digits.length) ? { href: productHref(digits) } : items[0]);
+    if (target) { go(target.getAttribute ? target.getAttribute("href") : target.href); closeResults(); q.value = ""; }
+  } else if (e.key === "Escape") closeResults();
+});
+document.addEventListener("click", (e) => { if (!e.target.closest(".search")) closeResults(); });
+
+// ------------------------------------------------------------------ router
+const routes = [
+  [/^\/?$/, "overview", viewOverview],
+  [/^\/explore$/, "explore", viewExplore],
+  [/^\/countries$/, "countries", viewCountries],
+  [/^\/country\/([A-Z]{3})$/, "countries", viewCountry],
+  [/^\/provinces$/, "provinces", viewProvinces],
+  [/^\/province\/(.+)$/, "provinces", viewProvince],
+  [/^\/prices$/, "prices", viewPrices],
+  [/^\/price\/(wb|ime|cbi)\/(.+)$/, "prices", viewPrice],
+  [/^\/opportunities$/, "opportunities", viewOpportunities],
+  [/^\/product\/(\d{2,10})$/, null, viewProduct],
+  [/^\/sources$/, "sources", viewSources],
+];
+let current = location.hash.replace(/^#/, "") || "/";
+let lastPath = null;
+const backStack = [];
+
+function go(path, { push = true } = {}) {
+  path = (path || "/").replace(/^#/, "") || "/";
+  if (push && path !== current) backStack.push(current);
+  current = path;
+  try {
+    if (push) history.pushState(null, "", `#${path}`);
+  } catch { /* sandboxed frames may refuse; the in-page path is enough */ }
+  updateBack();
+  route();
+}
+
+function updateBack() {
+  const back = document.getElementById("back");
+  if (back) back.hidden = !backStack.length;
+}
+
+async function route() {
+  hideTip();
+  const [path, query] = current.split("?");
+  const params = new URLSearchParams(query || "");
+  const hit = routes.map(([re, tab, view]) => [path.match(re), tab, view]).find(([m]) => m);
+  document.querySelectorAll("nav.tabs a").forEach((a) => a.classList.toggle("active", !!hit && a.dataset.tab === hit[1]));
+  main.classList.add("loading");
+  try {
+    const node = hit ? await hit[2](params, ...hit[0].slice(1)) : empty("صفحه پیدا نشد.", ["نمای کلی", "#/"]);
+    main.replaceChildren(node);
+  } catch (err) {
+    main.replaceChildren(h("div", { class: "banner" }, `خطا: ${err.message}`));
+  } finally {
+    main.classList.remove("loading");
+    if (path !== lastPath) scrollTo(0, 0);
+    lastPath = path;
+  }
+}
+
+// In-page links (#/...) navigate without leaving the page.
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#/"]');
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey || a.target === "_blank") return;
+  e.preventDefault();
+  go(a.getAttribute("href"));
+});
+document.getElementById("back")?.addEventListener("click", () => {
+  if (backStack.length) go(backStack.pop(), { push: false });
+  updateBack();
+});
+window.addEventListener("popstate", () => {
+  const path = location.hash.replace(/^#/, "") || "/";
+  if (path !== current) {
+    current = path;
+    route();
+  }
+});
+if (STATIC) {
+  document.querySelector("footer.foot")?.append(h("div", {}, "نسخه‌ی آنلاین (بدون سرور) · داده‌ها: برداشت ثابت از گمرک ایران، سازمان توسعه تجارت، اطلس هاروارد و UN Comtrade."));
+}
+route();
+
+})();
+</script>
+</body>
+</html>
