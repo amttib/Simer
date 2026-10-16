@@ -1,6 +1,6 @@
 # Silmer · Silk Meridian
 
-**Iran trade data hub, in English and Persian.** Live site: https://amttib.github.io/Simer/
+**Iran trade data hub, in English and Persian.** Live site: https://silmer.ir/
 
 Silmer is an interactive statistics book of Iran's foreign trade. It covers exports and imports by product (8-digit tariff line), country, customs office, province and month. It also shows world commodity prices, Iran Mercantile Exchange prices, official exchange rates, export opportunities and the world market for every product.
 
